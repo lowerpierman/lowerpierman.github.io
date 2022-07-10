@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="子标题面试时需删" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>title |  Y&amp;&amp;S</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/256love.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-软考知识点Markdown版本"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  title
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/05/26/%E8%BD%AF%E8%80%83%E7%9F%A5%E8%AF%86%E7%82%B9Markdown%E7%89%88%E6%9C%AC/" class="article-date">
+  <time datetime="2022-05-26T07:07:54.000Z" itemprop="datePublished">2022-05-26</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="一、计算机组成"><a href="#一、计算机组成" class="headerlink" title="一、计算机组成"></a>一、计算机组成</h1><h2 id="1-二进制运算："><a href="#1-二进制运算：" class="headerlink" title="1.二进制运算："></a>1.二进制运算：</h2><p>​	原码常常用作加法<br>​	移码常常用作浮点数计算与表示</p>
+<h2 id="2-校验码"><a href="#2-校验码" class="headerlink" title="2.校验码"></a>2.校验码</h2><p>​	奇偶校验码：加k个校验码后 1的位数达到奇数，就是奇校验 反之亦然<br>​	海明码：2^r&gt;&#x3D;1+k+r<br>​	CRC：CRC-n 校验码为n位</p>
+<h2 id="3-浮点数运算与常识"><a href="#3-浮点数运算与常识" class="headerlink" title="3.浮点数运算与常识"></a>3.浮点数运算与常识</h2><h3 id="运算过程"><a href="#运算过程" class="headerlink" title="运算过程"></a>运算过程</h3><p>​	1.对阶，对阶时小向大转换，转换时尾数右移<br>​			2.求和<br>​			3.规格化<br>​			4.舍入与溢出判断</p>
+<h3 id="什么是阶，什么是尾数"><a href="#什么是阶，什么是尾数" class="headerlink" title="什么是阶，什么是尾数"></a>什么是阶，什么是尾数</h3><h2 id="4-CPU"><a href="#4-CPU" class="headerlink" title="4.CPU"></a>4.CPU</h2><p>​	CPU分为控制器和运算器两部分<br>​	控制器包含程序计数器（PC），IR（指令寄存器），指令译码器（考的少）–》控制器的基本功能是发出指令，使机器有序执行<br>​	运算器包含算术逻辑运算单元（ALU），累加器（ACC），标志寄存器，寄存器组</p>
+<h2 id="5-常考所需芯片数题目，需谨慎计算"><a href="#5-常考所需芯片数题目，需谨慎计算" class="headerlink" title="5.常考所需芯片数题目，需谨慎计算"></a>5.常考所需芯片数题目，需谨慎计算</h2><h2 id="6-CaChe命中率，存取周期"><a href="#6-CaChe命中率，存取周期" class="headerlink" title="6.CaChe命中率，存取周期"></a>6.CaChe命中率，存取周期</h2><p>​	注意根据条件列等式</p>
+<h2 id="7-Cache全部由硬件实现，分为：直接相连，全相连，组相连。Cache由存储体、地址映像和替换机构组成，其中替换机构命中率最高的算法为LRU（最近最久未使用）"><a href="#7-Cache全部由硬件实现，分为：直接相连，全相连，组相连。Cache由存储体、地址映像和替换机构组成，其中替换机构命中率最高的算法为LRU（最近最久未使用）" class="headerlink" title="7.Cache全部由硬件实现，分为：直接相连，全相连，组相连。Cache由存储体、地址映像和替换机构组成，其中替换机构命中率最高的算法为LRU（最近最久未使用）"></a>7.Cache全部由硬件实现，分为：直接相连，全相连，组相连。Cache由存储体、地址映像和替换机构组成，其中替换机构命中率最高的算法为LRU（最近最久未使用）</h2><h2 id="8-Cache的地址位数由其容量决定，其容量的指数即为位数，给出在主存中的16位地址，低十四位为Cache地址。剩余位数为主存块号"><a href="#8-Cache的地址位数由其容量决定，其容量的指数即为位数，给出在主存中的16位地址，低十四位为Cache地址。剩余位数为主存块号" class="headerlink" title="8.Cache的地址位数由其容量决定，其容量的指数即为位数，给出在主存中的16位地址，低十四位为Cache地址。剩余位数为主存块号"></a>8.Cache的地址位数由其容量决定，其容量的指数即为位数，给出在主存中的16位地址，低十四位为Cache地址。剩余位数为主存块号</h2><p>​		若Cache为全相连映射，则先分析主存块号、块内地址位数，在分析主存块号对应的Cache块号</p>
+<h2 id="9-ROM只读包括Flash-RAM随机"><a href="#9-ROM只读包括Flash-RAM随机" class="headerlink" title="9.ROM只读包括Flash RAM随机"></a>9.ROM只读包括Flash RAM随机</h2><h2 id="10-设备管理：程序查询，中断，DMA，通道技术-DMA通过建立主存与外部设备之间的数据通路节省了CPU"><a href="#10-设备管理：程序查询，中断，DMA，通道技术-DMA通过建立主存与外部设备之间的数据通路节省了CPU" class="headerlink" title="10.设备管理：程序查询，中断，DMA，通道技术 DMA通过建立主存与外部设备之间的数据通路节省了CPU"></a>10.设备管理：程序查询，中断，DMA，通道技术 DMA通过建立主存与外部设备之间的数据通路节省了CPU</h2><h2 id="11-内存地址和I-x2F-o地址-的地址代码不同"><a href="#11-内存地址和I-x2F-o地址-的地址代码不同" class="headerlink" title="11. 内存地址和I&#x2F;o地址 的地址代码不同"></a>11. 内存地址和I&#x2F;o地址 的地址代码不同</h2><h2 id="12-CISC和RISC的区别"><a href="#12-CISC和RISC的区别" class="headerlink" title="12.CISC和RISC的区别"></a>12.CISC和RISC的区别</h2><p>​	CISC 大量指令，少量通用寄存器，微程序控制<br>​	RISC 很少指令，大量通用寄存器，直接控制</p>
+<h2 id="13-流水线的相关概念，不再重复"><a href="#13-流水线的相关概念，不再重复" class="headerlink" title="13.流水线的相关概念，不再重复"></a>13.流水线的相关概念，不再重复</h2><h2 id="14-串并联的可靠度与失效率"><a href="#14-串并联的可靠度与失效率" class="headerlink" title="14.串并联的可靠度与失效率"></a>14.串并联的可靠度与失效率</h2><h1 id="二、数据结构与算法"><a href="#二、数据结构与算法" class="headerlink" title="二、数据结构与算法"></a>二、数据结构与算法</h1><h2 id="1-偏移量–分为按行和按列的偏移量计算"><a href="#1-偏移量–分为按行和按列的偏移量计算" class="headerlink" title="1.偏移量–分为按行和按列的偏移量计算"></a>1.偏移量–分为按行和按列的偏移量计算</h2><h2 id="2-队列"><a href="#2-队列" class="headerlink" title="2.队列"></a>2.队列</h2><p>​		循环队列中元素应当为：rear&gt;front,ele&#x3D;rear-front rear&lt;front,ele&#x3D;(rear-front+M)&#x2F;M</p>
+<h2 id="3-字符串"><a href="#3-字符串" class="headerlink" title="3.字符串"></a>3.字符串</h2><p>​		在字符串中，空格并不是空，只是一种取值受限的线性表<br>​		字符串的广度：第一子元素个数<br>​		深度：括号层数</p>
+<h2 id="4-树"><a href="#4-树" class="headerlink" title="4.树"></a>4.树</h2><p>​		树的度：树节点中的子节点个数max<br>​		树的深度（高度）：从根到达叶子的边数+1<br>​		要复习哈夫曼树的构造<br>​		线索二叉树的结构（分为先序、中序、后序）<br>​		树如何转二叉树 所有兄弟变孩子</p>
+<h2 id="5-图"><a href="#5-图" class="headerlink" title="5.图"></a>5.图</h2><p>​		连通图指无向图<br>​		强联通图指有向图<br>​		生成树是无向图的极小联通子图<br>​		最小生成树是无向图中权值之和最小的生成树<br>​		AOE图可以估算工期<br>​		关键路径是指最长路径<br>​		无向连通图最少有n-1条边<br>​		邻接表、邻接矩阵<br>​		连通图的广度优先和深度优先生成树</p>
+<h2 id="6-查找方法"><a href="#6-查找方法" class="headerlink" title="6.查找方法"></a>6.查找方法</h2><p>​		顺序查找、二分（折半）查找、哈希查找<br>​		其中哈希查找时如果使用hash函数计算得到的数组下标重复，使用线性探测法或者伪随机数法寻找数组下标，线性探测即放入n+1位置，伪随机数为换hash函数</p>
+<h2 id="7-排序方法"><a href="#7-排序方法" class="headerlink" title="7.排序方法"></a>7.排序方法</h2><p>​		冒泡排序、快速排序、简单选择排序、直接插入排序、归并排序、希尔排序、堆排序、基数排序<br>​		其中，直接插入排序、冒泡排序、归并排序、基数排序是稳定的，<br>​		时间复杂度为O(n^2)的有直接插入、简单选择、冒泡排序，快速排序、归并排序、堆排序均为(Onlgn)<br>​		空间复杂度除快排（Onlgn）和归并基数其他均为O（1）</p>
+<h1 id="三、设计模式专栏"><a href="#三、设计模式专栏" class="headerlink" title="三、设计模式专栏"></a>三、设计模式专栏</h1><p>​	创建型	工厂、抽象工厂、单例、建造者、原型<br>​	结构型  代理、享元、桥接器、适配器、装饰、外观、组合<br>​	行为型	某某者大部分是行为型（观察者、中介者、访问者、模板方法、策略、命令、职责链、状态、迭代器、备忘录、解释器）<br>​	创建型  用于描述怎样创建对象，目的是将接口与对象分离；<br>​	结构型	用于描述将类或对象按照某种布局组成更复杂的对象；<br>​	行为型用于描述如何将类或对象之间进行协作，使其完成单个类无法完成的任务，并为各个类或对象分配职责。</p>
+<h1 id="四、操作系统"><a href="#四、操作系统" class="headerlink" title="四、操作系统"></a>四、操作系统</h1><p>​	进程管理</p>
+<h2 id="1-进程"><a href="#1-进程" class="headerlink" title="1.进程"></a>1.进程</h2><p>​		运行、就绪、阻塞<br>​		运行、活跃就绪、活跃阻塞、静态就绪、静态阻塞</p>
+<h2 id="2-PV操作"><a href="#2-PV操作" class="headerlink" title="2.PV操作"></a>2.PV操作</h2><p>​		P申请资源、V释放资源</p>
+<h2 id="3-死锁"><a href="#3-死锁" class="headerlink" title="3.死锁"></a>3.死锁</h2><p>​		互斥资源<br>​		死锁产生的条件：互斥、请求和保持。不剥夺、环路等待<br>​		解决死锁问题：死锁预防：破坏四个条件<br>​					  死锁避免：银行家算法<br>​					  死锁解除<br>​	存储管理</p>
+<h2 id="4-存储分区管理技术"><a href="#4-存储分区管理技术" class="headerlink" title="4.存储分区管理技术"></a>4.存储分区管理技术</h2><p>​		固定分区、可变分区、可重定位分区</p>
+<h2 id="5-可变分区的作业植入算法"><a href="#5-可变分区的作业植入算法" class="headerlink" title="5.可变分区的作业植入算法"></a>5.可变分区的作业植入算法</h2><p>​		最佳适应、最差适应、首次适应、循环首次适应</p>
+<h2 id="6-分页式、分段式、段页式"><a href="#6-分页式、分段式、段页式" class="headerlink" title="6.分页式、分段式、段页式"></a>6.分页式、分段式、段页式</h2><p>​		分页和分段其中的页和段不必连续<br>​		页大小固定，段不固定</p>
+<h2 id="7-缺页调度算法"><a href="#7-缺页调度算法" class="headerlink" title="7.缺页调度算法"></a>7.缺页调度算法</h2><p>​		FIFO、LRU、</p>
+<h2 id="8-文件管理"><a href="#8-文件管理" class="headerlink" title="8.文件管理"></a>8.文件管理</h2><p>​		文件系统是指实现文件管理的一种软件<br>​		文件系统实现了对文件的按名存取<br>​		文件的物理结构：顺序、链接、索引-》连续。。串联。。索引<br>​		树型目录</p>
+<h2 id="9-作业调度算法"><a href="#9-作业调度算法" class="headerlink" title="9.作业调度算法"></a>9.作业调度算法</h2><p>​		先来先服务、最短作业优先、最高响应比优先</p>
+<h2 id="10-磁盘调度算法"><a href="#10-磁盘调度算法" class="headerlink" title="10.磁盘调度算法"></a>10.磁盘调度算法</h2><h2 id="11补充"><a href="#11补充" class="headerlink" title="11补充"></a>11补充</h2><p>​		Unix把输入输出设备看做一种特殊的文件</p>
+<h1 id="五、编译原理与程序语言"><a href="#五、编译原理与程序语言" class="headerlink" title="五、编译原理与程序语言"></a>五、编译原理与程序语言</h1><h2 id="1-自动机、文法"><a href="#1-自动机、文法" class="headerlink" title="1.自动机、文法"></a>1.自动机、文法</h2><h2 id="2-解释型语言：Python"><a href="#2-解释型语言：Python" class="headerlink" title="2.解释型语言：Python"></a>2.解释型语言：Python</h2><p>​		编译型语言：java、cC++<br>​		函数型：Lisp</p>
+<h2 id="3-语法语义词法错误"><a href="#3-语法语义词法错误" class="headerlink" title="3.语法语义词法错误"></a>3.语法语义词法错误</h2><h1 id="六、数据库知识"><a href="#六、数据库知识" class="headerlink" title="六、数据库知识"></a>六、数据库知识</h1><h2 id="1-数据库模型"><a href="#1-数据库模型" class="headerlink" title="1.数据库模型"></a>1.数据库模型</h2><p>​		外模式、模式、内模式	外模式&#x2F;模式有多个-》逻辑独立	模式&#x2F;内模式只有一个-》物理独立<br>​		外模式：视图等；模式：物理数据库；内模式：真正的存储</p>
+<h2 id="2-关系运算：投影、选择、笛卡尔积、差、交、并、连接（自然、非自然外）、除"><a href="#2-关系运算：投影、选择、笛卡尔积、差、交、并、连接（自然、非自然外）、除" class="headerlink" title="2.关系运算：投影、选择、笛卡尔积、差、交、并、连接（自然、非自然外）、除"></a>2.关系运算：投影、选择、笛卡尔积、差、交、并、连接（自然、非自然外）、除</h2><h2 id="3-并发操作的错误"><a href="#3-并发操作的错误" class="headerlink" title="3.并发操作的错误"></a>3.并发操作的错误</h2><p>​		丢失修改、不可重复读、读脏数据</p>
+<h2 id="4-范式、函数依赖、规范化"><a href="#4-范式、函数依赖、规范化" class="headerlink" title="4.范式、函数依赖、规范化"></a>4.范式、函数依赖、规范化</h2><p>​		1NF-》2NF-》3NF-》BCNF<br>​		1-2：满足消除部分函数依赖<br>​		2-3：满足消除传递函数依赖<br>​		3-BC消除主属性之间的传递函数依赖<br>​		规范化：使用模式分解消除函数依赖<br>​		两种方法<br>​		1.表格法</p>
+<pre><code>    2.公式
+        R1∩R2-&gt;(R1-R2) R1∩R2-&gt;(R2-R1)是否正确？
+</code></pre>
+<h1 id="七、计算机网络"><a href="#七、计算机网络" class="headerlink" title="七、计算机网络"></a>七、计算机网络</h1><h2 id="1-TCP"><a href="#1-TCP" class="headerlink" title="1.TCP"></a>1.TCP</h2><p>​		应用层协议：FTP、TFTP、SMTP、Telent、SNMP、DNS、BGP	<br>​		传输层：TCP、UDO<br>​		网络层：IP、ARP、RARP、ICMP</p>
+<h1 id="八、多媒体知识"><a href="#八、多媒体知识" class="headerlink" title="八、多媒体知识"></a>八、多媒体知识</h1><h2 id="1-常见声音文件"><a href="#1-常见声音文件" class="headerlink" title="1.常见声音文件"></a>1.常见声音文件</h2><p>​		WAV、MOD、MPEG、RA、RMI、VOC</p>
+<h2 id="2-位图和矢图"><a href="#2-位图和矢图" class="headerlink" title="2.位图和矢图"></a>2.位图和矢图</h2><p>​		相比位图空间更大，显示速度更快</p>
+<h1 id="九、软件工程导论"><a href="#九、软件工程导论" class="headerlink" title="九、软件工程导论"></a>九、软件工程导论</h1><h2 id="1-模型"><a href="#1-模型" class="headerlink" title="1.模型"></a>1.模型</h2><p>​		瀑布、增量、原型、快速原型、喷泉、螺旋、V</p>
+<h2 id="2-软件估算模型"><a href="#2-软件估算模型" class="headerlink" title="2.软件估算模型"></a>2.软件估算模型</h2><p>​		IBM、patnam、COCOMO	其中IBM和COCOMO为静态，patnam为动态</p>
+<h2 id="3-鱼骨图、甘特图"><a href="#3-鱼骨图、甘特图" class="headerlink" title="3.鱼骨图、甘特图"></a>3.鱼骨图、甘特图</h2><p>​		鱼骨图适用于展现软件的关键部分，甘特图适用于动态展示项目进度</p>
+<h2 id="4-开发方法"><a href="#4-开发方法" class="headerlink" title="4.开发方法"></a>4.开发方法</h2><p>​		面向结构（数据流） 结构化开发<br>​		面向数据结构 Jackson、warnier<br>​		面向对象 UML、Booch</p>
+<h2 id="5-软件测试"><a href="#5-软件测试" class="headerlink" title="5.软件测试"></a>5.软件测试</h2><p>​		白盒：路径覆盖、判定覆盖、语句覆盖<br>​		黑盒..<br>​		代码审查</p>
+<h2 id="6-运行维护"><a href="#6-运行维护" class="headerlink" title="6.运行维护"></a>6.运行维护</h2><p>​		维护：改正、适应、完善、预防 其中完善工作量最大</p>
+<h2 id="7-MCcabe、可靠性、失效率"><a href="#7-MCcabe、可靠性、失效率" class="headerlink" title="7.MCcabe、可靠性、失效率"></a>7.MCcabe、可靠性、失效率</h2><h2 id="8-CMM"><a href="#8-CMM" class="headerlink" title="8.CMM"></a>8.CMM</h2><h1 id="九、UML、设计模式"><a href="#九、UML、设计模式" class="headerlink" title="九、UML、设计模式"></a>九、UML、设计模式</h1><h2 id="1-UML的关系"><a href="#1-UML的关系" class="headerlink" title="1.UML的关系"></a>1.UML的关系</h2><p>​		依赖	虚线<br>​		组合、聚合	实现+菱形的实心或者空心<br>​		关联	实线<br>​		泛化	三角空心箭头</p>
+<h2 id="2-设计模式详解"><a href="#2-设计模式详解" class="headerlink" title="2.设计模式详解"></a>2.设计模式详解</h2><p>​		创建型：工厂</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/05/26/%E8%BD%AF%E8%80%83%E7%9F%A5%E8%AF%86%E7%82%B9Markdown%E7%89%88%E6%9C%AC/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E8%80%83/" rel="tag">软考</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/05/26/%E8%BD%AF%E8%80%83%E5%A4%8D%E7%9B%98/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            title
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/05/26/%E9%9D%A2%E8%AF%95%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">title</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Yangzewei
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/256love.ico" alt="Y&amp;&amp;S"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/photo/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

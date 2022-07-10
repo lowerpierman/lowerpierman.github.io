@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="子标题面试时需删" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Sql_Restudy |  Y&amp;&amp;S</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/256love.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Sql-Restudy"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Sql_Restudy
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/06/04/Sql-Restudy/" class="article-date">
+  <time datetime="2022-06-04T01:44:22.000Z" itemprop="datePublished">2022-06-04</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">8 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>[TOC]</p>
+<h1 id="一、Sql查询语句"><a href="#一、Sql查询语句" class="headerlink" title="一、Sql查询语句"></a>一、Sql查询语句</h1><h6 id="写在前面："><a href="#写在前面：" class="headerlink" title="写在前面："></a>写在前面：</h6><p>优先级排序：from&gt;where&gt;group by &gt;having&gt;order by&gt;limit</p>
+<h2 id="查询函数："><a href="#查询函数：" class="headerlink" title="查询函数："></a>查询函数：</h2><p>基本语句:select **&#x2F;column* from <em>table_name</em>;</p>
+<ul>
+<li><h4 id="distinct-写在列名前，用于去掉重复的值。"><a href="#distinct-写在列名前，用于去掉重复的值。" class="headerlink" title="distinct:写在列名前，用于去掉重复的值。"></a>distinct:写在列名前，用于去掉重复的值。</h4></li>
+<li><h4 id="where查询子句-写在table-name-后，可以配合操作的运算符"><a href="#where查询子句-写在table-name-后，可以配合操作的运算符" class="headerlink" title="where查询子句:写在table_name 后，可以配合操作的运算符:"></a>where查询子句:写在table_name 后，可以配合操作的运算符:</h4><ul>
+<li><h5 id="between-nums1-and-nums2"><a href="#between-nums1-and-nums2" class="headerlink" title="between nums1 and nums2;"></a>between nums1 and nums2;</h5></li>
+<li><h5 id="AND-NOT-OR-NOT-IN-IN"><a href="#AND-NOT-OR-NOT-IN-IN" class="headerlink" title="AND,NOT,OR,NOT IN,IN;"></a>AND,NOT,OR,NOT IN,IN;</h5><p>当where子句中 a in b <strong>or</strong> not in b <strong>or</strong> and b <strong>or</strong> or b 其中b可以为子查询</p>
+</li>
+<li><h5 id="LIKE-‘-A-’-代表一个字符-代表多个字符；"><a href="#LIKE-‘-A-’-代表一个字符-代表多个字符；" class="headerlink" title="LIKE ‘_A%’,__代表一个字符,%代表多个字符；"></a>LIKE ‘_A%’,__代表一个字符,%代表多个字符；</h5></li>
+<li><h5 id="as-指定别名；用法：select-name-sal-bonus-as-总薪资-from-emp-where-sal-bonus-gt-3000"><a href="#as-指定别名；用法：select-name-sal-bonus-as-总薪资-from-emp-where-sal-bonus-gt-3000" class="headerlink" title="as 指定别名；用法：select name, sal+bonus as 总薪资 from emp where (sal+bonus)&gt;3000;"></a>as 指定别名；用法：select name, sal+bonus as 总薪资 from emp where (sal+bonus)&gt;3000;</h5></li>
+<li><p>exists、not exists</p>
+<ul>
+<li>exist 替代了多表查询可以直接从exist(select * from tb1 where tb.id&#x3D;tb1.tbid)得到的信息作为输出</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="排序查询：order-by-排序列名-asc-x2F-desc-升序-x2F-降序；"><a href="#排序查询：order-by-排序列名-asc-x2F-desc-升序-x2F-降序；" class="headerlink" title="排序查询：order by 排序列名 asc&#x2F;desc 升序&#x2F;降序；"></a>排序查询：order by 排序列名 asc&#x2F;desc 升序&#x2F;降序；</h4></li>
+<li><h4 id="分组查询：group-by分组依据的列名；"><a href="#分组查询：group-by分组依据的列名；" class="headerlink" title="分组查询：group by	分组依据的列名；"></a>分组查询：group by	分组依据的列名；</h4></li>
+<li><h4 id="聚合函数：sum、count、avg、max、min"><a href="#聚合函数：sum、count、avg、max、min" class="headerlink" title="聚合函数：sum、count、avg、max、min"></a>聚合函数：sum、count、avg、max、min</h4></li>
+</ul>
+<h6 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h6><p>​	聚合函数不能用在where子句中，除非嵌套查询。</p>
+<p>​	其他常见函数：ceil 向上取整、floor&#x2F;round向下取整、rand随机数</p>
+<ul>
+<li><h4 id="多表查询：其中可以写别名，如：from-A-a-B-b"><a href="#多表查询：其中可以写别名，如：from-A-a-B-b" class="headerlink" title="多表查询：其中可以写别名，如：from A a,B b"></a>多表查询：其中可以写别名，如：from A a,B b</h4></li>
+</ul>
+<p>正常的from a，b where a.id&#x3D;b.aid 这种叫内连接，和from a inner join b on a.id&#x3D;b.aid 效果一样。</p>
+<ul>
+<li><h5 id="外连接：左外连接：from-a-left-join-on-a-id-x3D-b-aid"><a href="#外连接：左外连接：from-a-left-join-on-a-id-x3D-b-aid" class="headerlink" title="外连接：左外连接：from a left join on(a.id&#x3D;b.aid);"></a>外连接：左外连接：from a left join on(a.id&#x3D;b.aid);</h5></li>
+<li><h5 id="右外连接：from-a-right-join-on-a-id-x3D-b-aid"><a href="#右外连接：from-a-right-join-on-a-id-x3D-b-aid" class="headerlink" title="右外连接：from a right join on(a.id&#x3D;b.aid);"></a>右外连接：from a right join on(a.id&#x3D;b.aid);</h5></li>
+<li><h4 id="Having条件查询：在分组之后使用的where，可以包含聚合函数，限制的是组"><a href="#Having条件查询：在分组之后使用的where，可以包含聚合函数，限制的是组" class="headerlink" title="Having条件查询：在分组之后使用的where，可以包含聚合函数，限制的是组"></a>Having条件查询：在分组之后使用的where，可以包含聚合函数，限制的是组</h4></li>
+<li><h4 id="Limit限制范围语句：放在最后如-from-tab-name-where-…-group-by-…-desc-x2F-asc-having-…-limit-a-b"><a href="#Limit限制范围语句：放在最后如-from-tab-name-where-…-group-by-…-desc-x2F-asc-having-…-limit-a-b" class="headerlink" title="Limit限制范围语句：放在最后如 from tab_name where … group by … desc&#x2F;asc having … limit a,b;"></a>Limit限制范围语句：放在最后如 from tab_name where … group by … desc&#x2F;asc having … limit a,b;</h4></li>
+<li><h4 id="UNION合并语句：将两个select查询的结果集合并，这两个结果集的列数量顺序都相同，且自动去重。"><a href="#UNION合并语句：将两个select查询的结果集合并，这两个结果集的列数量顺序都相同，且自动去重。" class="headerlink" title="UNION合并语句：将两个select查询的结果集合并，这两个结果集的列数量顺序都相同，且自动去重。"></a>UNION合并语句：将两个select查询的结果集合并，这两个结果集的列数量顺序都相同，且自动去重。</h4></li>
+</ul>
+<h1 id="二、增删改"><a href="#二、增删改" class="headerlink" title="二、增删改"></a>二、增删改</h1><p>insert into tab_name(col1,col2…) values(val1,val2…)</p>
+<p>update tab_name set col1&#x3D;val1 where …;</p>
+<p>delete from tab_name where …;</p>
+<p>新增：删除表一共有三种方法：</p>
+<ul>
+<li>delete 效率最低，因为DML支持事务，需要记录数据库日志</li>
+<li>truncate 其次，初始化该表</li>
+<li>drop 效率最高，将表结构也删除</li>
+</ul>
+<h1 id="三、DDL、DML、DCL"><a href="#三、DDL、DML、DCL" class="headerlink" title="三、DDL、DML、DCL"></a>三、DDL、DML、DCL</h1><h2 id="1-DDL-data-define-language"><a href="#1-DDL-data-define-language" class="headerlink" title="1.DDL data define language"></a>1.DDL data define language</h2><h5 id="操作库方法"><a href="#操作库方法" class="headerlink" title="操作库方法"></a>操作库方法</h5><ul>
+<li>show databases;	use db_name;</li>
+<li>create database db_name[Utf-8];</li>
+<li>drop database db_name;</li>
+<li>alter database db_name character set 字符编码;(修改数据库只能改编码)</li>
+</ul>
+<h5 id="操作表方法"><a href="#操作表方法" class="headerlink" title="操作表方法"></a>操作表方法</h5><ul>
+<li><strong>create</strong> table tab_name(a_id int,a_sno varchar(10),…)</li>
+<li><strong>show</strong> tables;</li>
+<li><strong>show</strong> <strong>create</strong> table tab_name;</li>
+<li><strong>desc</strong> tab_name;</li>
+<li><strong>drop</strong> table tab_name;</li>
+<li>(添加新字段到最后)<strong>alter</strong> table tab_name add column(a_class varchar(20))</li>
+<li>指定字段后:<strong>alter</strong> table tab_name add column(a_class varchar(20)) <strong>after</strong> a_id;</li>
+<li><strong>alter</strong> table tab_name <strong>drop</strong> 字段名;</li>
+<li><strong>alter</strong> table tab_name <strong>change</strong> a_id a_bid varchar(10);</li>
+</ul>
+<h5 id="操作索引、视图、存储过程"><a href="#操作索引、视图、存储过程" class="headerlink" title="操作索引、视图、存储过程"></a>操作索引、视图、存储过程</h5><ul>
+<li>索引<ul>
+<li><strong>create</strong> <strong>Index</strong> index_name  on tab_name(col_name);</li>
+<li><strong>show</strong> <strong>Index</strong> from tab_name;</li>
+<li><strong>drop</strong>  <strong>index</strong> index_name on tab_name;</li>
+</ul>
+</li>
+<li>视图–提前做select 保存的虚表<ul>
+<li><strong>create</strong> <strong>view</strong> view_name <strong>as</strong> <strong>select</strong> col_name <strong>from</strong> tab_name where …;</li>
+<li>通过视图更新真实表的值：</li>
+<li><strong>update</strong> view_name <strong>set</strong> <strong>name&#x3D;</strong>‘’ where <strong>name&#x3D;</strong>‘’;</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-DML-data-manipulation-language"><a href="#2-DML-data-manipulation-language" class="headerlink" title="2.DML data manipulation language"></a>2.DML data manipulation language</h2><h2 id="3-DCL-data-control-language"><a href="#3-DCL-data-control-language" class="headerlink" title="3.DCL   data control language"></a>3.DCL   data control language</h2><ul>
+<li><p>创建用户</p>
+<p><strong>create</strong> user username@localhost&#x2F;‘%’ <strong>identified</strong> by ‘pwd’;</p>
+</li>
+<li><p>用户授权</p>
+<p><strong>grant</strong>  all&#x2F;up&#x2F;se&#x2F;de&#x2F;in on db_name.tab_name from username@地址；</p>
+</li>
+<li><p>撤销授权</p>
+</li>
+<li><p><strong>revoke</strong> all&#x2F;update&#x2F;select&#x2F;delete&#x2F;insert on db_name.tab_name from username@地址；</p>
+</li>
+<li><p>查看权限</p>
+<p><strong>show</strong> grants for username@地址</p>
+</li>
+<li><p>删除用户</p>
+<p><strong>drop</strong> user username@地址(localhost&#x2F;‘%’)</p>
+</li>
+</ul>
+<h1 id="四、索引"><a href="#四、索引" class="headerlink" title="四、索引"></a>四、索引</h1><h6 id="索引的优缺点："><a href="#索引的优缺点：" class="headerlink" title="索引的优缺点："></a>索引的优缺点：</h6><p>优点：加快数据库的查询速度，展开来讲就是加快表之间的join，减少分组和排序的时间	</p>
+<p>缺点：需要时间创建维护索引，索引本身占据内存，不适合在增删改较多的情况下使用</p>
+<p>B树、B+树、Hash以及红黑树</p>
+<p>最常见的是B+树</p>
+<p>B+树优势：只有叶子节点才存储数据，可以更高效的存放索引，并且不会导致树的高度过高</p>
+<p>B树的劣势：在内部节点中存放数据，存储的索引相对会少，且不稳定</p>
+<p>hash劣势：hash冲突容易发生，不管使用拉链法还是线性探测法其效率都不如B+树</p>
+<p>红黑树：</p>
+<p>索引分类：聚簇，非聚簇  根据数据与索引是否分开判断</p>
+<p>聚簇索引叶子节点直接存放数据，非聚簇存放的是指向数据的地址</p>
+<p>最左匹配原则：索引必须从左到右的匹配条件，若出现like以%开头、between、运算符、&lt;&gt;!、数据转换等函数都会导致索引失效。</p>
+<h1 id="五、实际应用"><a href="#五、实际应用" class="headerlink" title="五、实际应用"></a>五、实际应用</h1><p>1.一条查询语句的执行</p>
+<p>​	取得mysql中的连接器</p>
+<p>​	对sql语句进行词法语法分析</p>
+<p>​	优化器：决定使用的索引，join的连接顺序</p>
+<p>​	执行器：依次执行，并在执行前判断有无权限</p>
+<h1 id="六、数据库隔离级别、MVVC"><a href="#六、数据库隔离级别、MVVC" class="headerlink" title="六、数据库隔离级别、MVVC"></a>六、数据库隔离级别、MVVC</h1><h2 id="1-隔离级别"><a href="#1-隔离级别" class="headerlink" title="1.隔离级别"></a>1.隔离级别</h2><p>脏读是指读取了其他事务未提交的数据</p>
+<p>不可重复读是指不能重复读取同一数据的相同数值</p>
+<p>幻读是指表中的数据在本事务两次读取的过程中增加或减少</p>
+<p><strong>读未提交</strong>	</p>
+<p><strong>读已提交</strong>	解决脏读</p>
+<p><strong>可重复读</strong>	解决不可重复读	</p>
+<p><strong>序列化</strong>	解决幻读</p>
+<p>行级锁、表级锁	InnoDB支持行级锁，MyISam仅仅支持表级锁</p>
+<p><strong>行级锁</strong>：</p>
+<ol>
+<li><strong>记录锁</strong>	单个行记录</li>
+<li><strong>间隙锁</strong>    锁定一个范围，不包含记录本身</li>
+<li><strong>临键锁</strong>    记录+间隙</li>
+</ol>
+<p><strong>MVCC</strong>比行级锁还细的锁</p>
+<h2 id="2-MVCC-Multi-Version-Concurrency-Control"><a href="#2-MVCC-Multi-Version-Concurrency-Control" class="headerlink" title="2.MVCC(Multi Version Concurrency Control)"></a>2.MVCC(Multi Version Concurrency Control)</h2><h3 id="2-1-MVCC的概念和作用方法"><a href="#2-1-MVCC的概念和作用方法" class="headerlink" title="2.1 MVCC的概念和作用方法"></a>2.1 MVCC的概念和作用方法</h3><p>多版本并发控制，是用来解决读写冲突的无锁并发控制方法。</p>
+<p>对事务分配单向增长的时间戳，为每一次事务执行后的修改保存一份副本。版本与时间戳关联可以用来解决读时必须阻塞写 或写时必须阻塞读，我们在读取时直接读取事务开始前的副本就可以。</p>
+<p>可以解决脏读，不可重复读，幻读</p>
+<p>但不能解决更新丢失问题。</p>
+<h3 id="2-2-MVCC原理"><a href="#2-2-MVCC原理" class="headerlink" title="2.2 MVCC原理"></a>2.2 MVCC原理</h3><p>依赖记录中的三个隐式字段、undo日志以及read view实现的</p>
+<h1 id="七、Mysql性能优化"><a href="#七、Mysql性能优化" class="headerlink" title="七、Mysql性能优化"></a>七、Mysql性能优化</h1><h2 id="1-sql语句优化-慢查询优化"><a href="#1-sql语句优化-慢查询优化" class="headerlink" title="1.sql语句优化(慢查询优化)"></a>1.sql语句优化(慢查询优化)</h2><h6 id="流程：捕获低效sql-gt-慢查询优化的方法和原则"><a href="#流程：捕获低效sql-gt-慢查询优化的方法和原则" class="headerlink" title="流程：捕获低效sql-&gt;慢查询优化的方法和原则"></a>流程：捕获低效sql-&gt;慢查询优化的方法和原则</h6><p><strong>如何捕获低效sql？</strong></p>
+<p>1.slow_query_log	用来捕获执行时间超时的sql</p>
+<p>2.ong_query_time	当sql执行时间超过此数值，会被记录到日志中</p>
+<p>3.slow_query_log_file	记录日志文件名</p>
+<p>4.log_queries_not_using_indexes	捕获未使用索引的sql语句</p>
+<p><strong>对低效sql的优化</strong></p>
+<blockquote>
+<p>首先回顾 exists notexists	in not in的使用</p>
+<p>Example：</p>
+<p>exists:select *  from s where sno exists(select 1 from c where cno&#x3D;1 and c.sno&#x3D;s.sno)</p>
+<p>in:select *  from s where sno in (select sno from c where cno&#x3D;1 )</p>
+</blockquote>
+<p>1.1 exists相比in速率更快，因此我们常常使用exists代替in；</p>
+<p>1.2 尽量使用连接(left join right join inner join)，不要使用子查询(in exists) </p>
+<p>1.3 尽量不要用*</p>
+<p>1.4 在join时尽量用小表join大表(左连接)</p>
+<p>1.5 表规模过大时要使用limit</p>
+<h2 id="2-单表数据量过大优化及数据库表优化"><a href="#2-单表数据量过大优化及数据库表优化" class="headerlink" title="2.单表数据量过大优化及数据库表优化"></a>2.单表数据量过大优化及数据库表优化</h2><p>2.1不得使用无limit限制的sql</p>
+<p>2.2 垂直拆分 将一个表拆分多个子表，重复的外键导致冗余</p>
+<p>2.3 水平拆分 将行数据存到多个表中，放到不同的库中，逻辑实现复杂</p>
+<p>2.3.1 目前的数据库分片主要实现在客户端和中间件</p>
+<p>2.3.2  客户端代理：分片逻辑在应用层</p>
+<p>2.3.3 中间件代理：逻辑在应用层和数据层之间</p>
+<p>2.3.4 分表后id主键如何处理：</p>
+<ol>
+<li>不同的表设置不同的步长</li>
+<li>Redis生成id</li>
+<li>美团leaf分布式id生成器</li>
+</ol>
+<p>2.4 表的字段尽量不用null</p>
+<h2 id="3-索引优化"><a href="#3-索引优化" class="headerlink" title="3.索引优化"></a>3.索引优化</h2><p>3.1 对于表中有空值的字段不要对该表设置索引</p>
+<p>3.2 对于常常在where中使用的列设置索引</p>
+<p>3.3 不要使用!&#x3D; &lt; &gt; 会导致索引失效</p>
+<p>3.4 尽量使用left join，别的连接会导致索引失效</p>
+<p>3.5 between和运算符会导致索引失效</p>
+<p>3.6 最左匹配 复合索引必须从左到右来匹配</p>
+<p>3.7 避免使用or</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/06/04/Sql-Restudy/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sql/" rel="tag">Sql</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/06/04/%E6%B3%B0%E4%B8%BA%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93-06-02/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            泰为面试总结-06-02
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/06/01/%E9%98%BF%E9%87%8C%E7%94%B5%E8%AF%9D%E9%9D%A2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">阿里电话面---</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Yangzewei
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/256love.ico" alt="Y&amp;&amp;S"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/photo/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

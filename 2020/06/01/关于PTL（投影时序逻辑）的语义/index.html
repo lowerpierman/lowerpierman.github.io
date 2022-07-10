@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="子标题面试时需删" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>关于PTL（投影时序逻辑）的语义 |  Y&amp;&amp;S</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/256love.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-关于PTL（投影时序逻辑）的语义"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  关于PTL（投影时序逻辑）的语义
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/06/01/%E5%85%B3%E4%BA%8EPTL%EF%BC%88%E6%8A%95%E5%BD%B1%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%EF%BC%89%E7%9A%84%E8%AF%AD%E4%B9%89/" class="article-date">
+  <time datetime="2020-06-01T13:06:09.000Z" itemprop="datePublished">2020-06-01</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>PTL（投影时序逻辑）是一阶区间时序逻辑的一种扩展，相比之前的LTL（线性时序逻辑）和CTL（分支时序逻辑）引入了一种全新的投影操作符prj，PTL更适用于软件的描述和验证，下面是PTL的语法和语义。 一、语法 Prop为原子命题的可数集合,V为静态变量和动态变量的可数集合,D为 任何数据类型的有穷论域,N0为非负整数集合,N1为正整数集合，投影时序逻辑的项e和公式P归纳如下：</p>
+<p>其中, 为常量，是静态变量，是动态变量 变量或者动态变量任尸为原子命题,…,司与。, 带有二元参数的函数与谓词,…,凡及尸为的合式公式 及夕勺是原始时态操作符 勺任是任意的静态 鲡分别表示上 、</p>
+<p>PTL也使用 而PTL相比经典一阶逻辑（命题逻辑与谓词逻辑）所不同的是增加了七个派生的操作符和三个原始操作符，其中最常用的是 </p>
+<pre><code>     ⊙
+</code></pre>
+<p>​<br>         (</p>
+<p>​<br>         W</p>
+<p>​<br>         e</p>
+<p>​<br>         a</p>
+<p>​<br>         k</p>
+<p>​<br>         N</p>
+<p>​<br>         e</p>
+<p>​<br>         x</p>
+<p>​<br>         t</p>
+<p>​<br>         )</p>
+<p>​<br>         、</p>
+<p>​<br>          ; </p>
+<p>​<br>         (</p>
+<p>​<br>         C</p>
+<p>​<br>         h</p>
+<p>​<br>         o</p>
+<p>​<br>         p</p>
+<p>​<br>         )</p>
+<p>​<br>         、</p>
+<p>​<br>         ⋄</p>
+<p>​<br>         (</p>
+<p>​<br>         S</p>
+<p>​<br>         o</p>
+<p>​<br>         m</p>
+<p>​<br>         e</p>
+<p>​<br>         t</p>
+<p>​<br>         i</p>
+<p>​<br>         m</p>
+<p>​<br>         e</p>
+<p>​<br>         s</p>
+<p>​<br>         )</p>
+<p>​<br>         、</p>
+<p>​<br>         □</p>
+<p>​<br>         (</p>
+<p>​<br>         A</p>
+<p>​<br>         l</p>
+<p>​<br>         w</p>
+<p>​<br>         a</p>
+<p>​<br>         y</p>
+<p>​<br>         s</p>
+<p>​<br>         )</p>
+<p>​<br>         、</p>
+<p>​<br>         ∣</p>
+<p>​<br>         ∣</p>
+<p>​<br>         (</p>
+<p>​<br>         P</p>
+<p>​<br>         a</p>
+<p>​<br>         r</p>
+<p>​<br>         a</p>
+<p>​<br>         l</p>
+<p>​<br>         l</p>
+<p>​<br>         e</p>
+<p>​<br>         l</p>
+<p>​<br>         )</p>
+<p>​<br>         、</p>
+<p>​<br>         O</p>
+<p>​<br>         (</p>
+<p>​<br>         N</p>
+<p>​<br>         e</p>
+<p>​<br>         x</p>
+<p>​<br>         t</p>
+<p>​<br>         )</p>
+<p>​<br>         、</p>
+<p>​<br>         +</p>
+<p>​<br>         (</p>
+<p>​<br>         C</p>
+<p>​<br>         h</p>
+<p>​<br>         o</p>
+<p>​<br>         p</p>
+<p>​<br>         P</p>
+<p>​<br>         l</p>
+<p>​<br>         u</p>
+<p>​<br>         s</p>
+<p>​<br>         )</p>
+<p>​<br>         、</p>
+<p>​<br>         p</p>
+<p>​<br>         r</p>
+<p>​<br>         j</p>
+<p>​<br>         (</p>
+<p>​<br>         P</p>
+<p>​<br>         r</p>
+<p>​<br>         o</p>
+<p>​<br>         j</p>
+<p>​<br>         e</p>
+<p>​<br>         c</p>
+<p>​<br>         t</p>
+<p>​<br>         i</p>
+<p>​<br>         o</p>
+<p>​<br>         n</p>
+<p>​<br>         )</p>
+<p>​<br>​<br>        \odot(Weak Next) 、 \text { ; }(Chop) 、\diamond(Sometimes) 、 \square(Always) 、||(Parallel)、O(Next)、+(Chop Plus)、prj(Projection)</p>
+<p>​<br>     ⊙(WeakNext)、 ; (Chop)、⋄(Sometimes)、□(Always)、∣∣(Parallel)、O(Next)、+(ChopPlus)、prj(Projection)</p>
+<p>二、PTL的语义 </p>
+<pre><code>     1.
+</code></pre>
+<p>​<br>         ◯</p>
+<p>​<br>         P</p>
+<p>​<br>          和 </p>
+<p>​<br>         ⊙</p>
+<p>​<br>         P</p>
+<p>​<br>​<br>          的</p>
+<p>​<br>          语</p>
+<p>​<br>          义</p>
+<p>​<br>          ：</p>
+<p>​<br>​<br>​<br>        {1.}\bigcirc P \text { 和 } \odot P{的语义：}</p>
+<p>​<br>     1.◯P 和 ⊙P的语义： <img src="https://img-blog.csdnimg.cn/20210407091325340.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTEwNjc4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"> 图2.1中： (a)代表len(n)是有穷区间下长度为n的节点； (b)代表Σ为当前区间长度为0； ©代表skip为当前为有穷区间且长度为1； (d)代表当前任何长度大于1的状况； 图2.2中: (a)OP代表该有穷状态下s0之后的所有节点其状态均为P且当前长度大于0； (b)有以下两种情况：(1).区间的长度为0;(2).区间长度大于0且(a)成立。</p>
+<p>2 ；（chop）操作符语义 <img src="https://img-blog.csdnimg.cn/20210407092929486.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTEwNjc4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>图2.3中： (a)代表PTL中chop操作符的语义，代表区间必须分为两部分，并且P在第一部分成立（有穷区间）且Q在第二部分成立（可以有穷可以无穷）； (b代表ITL中chop操作符的语义，代表无穷区间P成立或者P在第一区间成立，Q在第二区间成立；</p>
+<p>​<br>​<br>​<br>​<br>         3.</p>
+<p>​<br>         ⋄</p>
+<p>​<br>         (</p>
+<p>​<br>         S</p>
+<p>​<br>         o</p>
+<p>​<br>         m</p>
+<p>​<br>         e</p>
+<p>​<br>         t</p>
+<p>​<br>         i</p>
+<p>​<br>         m</p>
+<p>​<br>         e</p>
+<p>​<br>         s</p>
+<p>​<br>         )</p>
+<p>​<br>         、</p>
+<p>​<br>         □</p>
+<p>​<br>         (</p>
+<p>​<br>         A</p>
+<p>​<br>         l</p>
+<p>​<br>         w</p>
+<p>​<br>         a</p>
+<p>​<br>         y</p>
+<p>​<br>         s</p>
+<p>​<br>         )</p>
+<p>​<br>​<br>          的</p>
+<p>​<br>          语</p>
+<p>​<br>          义</p>
+<p>​<br>​<br>​<br>        {3 .}\diamond(Sometimes) 、 \square(Always){的语义 } </p>
+<p>​<br>     3.⋄(Sometimes)、□(Always)的语义  <img src="https://img-blog.csdnimg.cn/20210407093047850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTEwNjc4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"> 图2.4中: (a)P代表该有穷状态下在某一子区间内P成立； (b)P代表在所有的子区间内P成立。</p>
+<p>4 ||(Parallel)操作符的语义 <img src="https://img-blog.csdnimg.cn/20210407093321544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTEwNjc4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"> 图2.6中: (a)P||Q代表P先于Q结束，P为有穷时间内结束而Q可以是在有穷时间内结束也可以是无穷时间内结束； (b)P||Q代表P、Q同时结束，为有穷或者无穷时间内结束； ©P||Q代表Q先于P结束，Q为有穷时间内结束而P可以是在有穷时间内结束也可以是无穷时间内结束。</p>
+<p>5 prj投影操作符的语义： <img src="https://img-blog.csdnimg.cn/20210407093629575.png" alt="在这里插入图片描述"> 图2.7给出了 投影公式 </p>
+<pre><code>     (
+</code></pre>
+<p>​<br>​<br>          P</p>
+<p>​<br>          1</p>
+<p>​<br>​<br>         ,</p>
+<p>​<br>​<br>          P</p>
+<p>​<br>          2</p>
+<p>​<br>​<br>         ,</p>
+<p>​<br>​<br>          P</p>
+<p>​<br>          3</p>
+<p>​<br>​<br>         )</p>
+<p>​<br>​<br>        p</p>
+<p>​<br>        r</p>
+<p>​<br>        j</p>
+<p>​<br>        Q</p>
+<p>​<br>​<br>       \left(P_{1}, P_{2}, P_{3}\right) p r j Q</p>
+<p>​<br>    (P1​,P2​,P3​)prjQ 的语义. 尽管 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         1</p>
+<p>​<br>​<br>​<br>       P_{1}</p>
+<p>​<br>    P1​ 和 </p>
+<p>​<br>​<br>​<br>        Q</p>
+<p>​<br>​<br>       Q</p>
+<p>​<br>    Q 在状态 </p>
+<p>​<br>​<br>​<br>​<br>         s</p>
+<p>​<br>         0</p>
+<p>​<br>​<br>​<br>       s_{0}</p>
+<p>​<br>    s0​ 同时开始执行, 但经过 </p>
+<p>​<br>​<br>​<br>        Q</p>
+<p>​<br>​<br>       Q</p>
+<p>​<br>    Q 和进程 序列 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         1</p>
+<p>​<br>​<br>        ,</p>
+<p>​<br>​<br>         P</p>
+<p>​<br>         2</p>
+<p>​<br>​<br>        ,</p>
+<p>​<br>​<br>         P</p>
+<p>​<br>         3</p>
+<p>​<br>​<br>​<br>       P_{1}, P_{2}, P_{3}</p>
+<p>​<br>    P1​,P2​,P3​ 在一段时间并发执行后, 可能在不同的时间点结束, 三种可能的结果分别是: </p>
+<p>​<br>​<br>​<br>        (</p>
+<p>​<br>        a</p>
+<p>​<br>        )</p>
+<p>​<br>        Q</p>
+<p>​<br>​<br>       (\mathrm{a}) Q</p>
+<p>​<br>    (a)Q 先于 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         3</p>
+<p>​<br>​<br>​<br>       P_{3}</p>
+<p>​<br>    P3​ 结束，这种情况要求 </p>
+<p>​<br>​<br>​<br>        Q</p>
+<p>​<br>​<br>       Q</p>
+<p>​<br>    Q 只能是有穷时间结束，但 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         3</p>
+<p>​<br>​<br>​<br>       P_{3}</p>
+<p>​<br>    P3​ 的执行时间可以为有穷或无穷 $; </p>
+<p>​<br>​<br>​<br>        (</p>
+<p>​<br>        b</p>
+<p>​<br>        )</p>
+<p>​<br>​<br>         P</p>
+<p>​<br>         3</p>
+<p>​<br>​<br>​<br>       (\mathrm{b}) P_{3}</p>
+<p>​<br>    (b)P3​ 与 </p>
+<p>​<br>​<br>​<br>        Q</p>
+<p>​<br>​<br>       Q</p>
+<p>​<br>    Q 同时结束，这种情况要求 </p>
+<p>​<br>​<br>​<br>        Q</p>
+<p>​<br>        与</p>
+<p>​<br>​<br>         P</p>
+<p>​<br>         3</p>
+<p>​<br>​<br>​<br>       Q 与 P_{3}</p>
+<p>​<br>    Q与P3​ 的执行时态空间都只能是有穷; </p>
+<p>​<br>​<br>​<br>        (</p>
+<p>​<br>        c</p>
+<p>​<br>        )</p>
+<p>​<br>        Q</p>
+<p>​<br>​<br>       (\mathrm{c}) Q</p>
+<p>​<br>    (c)Q 在 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         3</p>
+<p>​<br>​<br>​<br>       P_{3}</p>
+<p>​<br>    P3​ 之后结束，这种情况要求 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         3</p>
+<p>​<br>​<br>​<br>       P_{3}</p>
+<p>​<br>    P3​ 只能是有穷时间结束，但 </p>
+<p>​<br>​<br>​<br>        Q</p>
+<p>​<br>​<br>       Q</p>
+<p>​<br>    Q 可以是有穷或无穷。 注意，在公式 </p>
+<p>​<br>​<br>​<br>​<br>         (</p>
+<p>​<br>​<br>          P</p>
+<p>​<br>          1</p>
+<p>​<br>​<br>         ,</p>
+<p>​<br>         …</p>
+<p>​<br>         ,</p>
+<p>​<br>​<br>          P</p>
+<p>​<br>          m</p>
+<p>​<br>​<br>         )</p>
+<p>​<br>​<br>        p</p>
+<p>​<br>        r</p>
+<p>​<br>        j</p>
+<p>​<br>        Q</p>
+<p>​<br>​<br>       \left(P_{1}, \ldots, P_{m}\right) p r j Q</p>
+<p>​<br>    (P1​,…,Pm​)prjQ 中，任何一个 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         1</p>
+<p>​<br>​<br>        ,</p>
+<p>​<br>        …</p>
+<p>​<br>        ,</p>
+<p>​<br>​<br>         P</p>
+<p>​<br>​<br>          m</p>
+<p>​<br>          −</p>
+<p>​<br>          1</p>
+<p>​<br>​<br>​<br>​<br>       P_{1}, \ldots, P_{m-1}</p>
+<p>​<br>    P1​,…,Pm−1​ 的执行时间只能是有穷。</p>
+<p>投影操作符 </p>
+<pre><code>    p
+</code></pre>
+<p>​<br>        r</p>
+<p>​<br>        j</p>
+<p>​<br>​<br>       p r j</p>
+<p>​<br>    prj 是PTL的核心操作符, 具备直接描述进程问并发和同步的能力, 可 以方便的对并发和交互式系统建模。投影公式 </p>
+<p>​<br>​<br>​<br>​<br>         (</p>
+<p>​<br>​<br>          P</p>
+<p>​<br>          1</p>
+<p>​<br>​<br>         ,</p>
+<p>​<br>         …</p>
+<p>​<br>         ,</p>
+<p>​<br>​<br>          P</p>
+<p>​<br>          m</p>
+<p>​<br>​<br>         )</p>
+<p>​<br>​<br>        p</p>
+<p>​<br>        r</p>
+<p>​<br>        j</p>
+<p>​<br>        Q</p>
+<p>​<br>​<br>       \left(P_{1}, \ldots, P_{m}\right) p r j Q</p>
+<p>​<br>    (P1​,…,Pm​)prjQ 表达的直观含义是进程 </p>
+<p>​<br>​<br>​<br>        Q</p>
+<p>​<br>​<br>       Q</p>
+<p>​<br>    Q 与进程序列 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         1</p>
+<p>​<br>​<br>        ,</p>
+<p>​<br>        …</p>
+<p>​<br>        ,</p>
+<p>​<br>​<br>         P</p>
+<p>​<br>         m</p>
+<p>​<br>​<br>​<br>       P_{1}, \ldots, P_{m}</p>
+<p>​<br>    P1​,…,Pm​ 并行在两个不同的时态空间内执行，其中进程 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         1</p>
+<p>​<br>​<br>        ,</p>
+<p>​<br>        …</p>
+<p>​<br>        ,</p>
+<p>​<br>​<br>         P</p>
+<p>​<br>         m</p>
+<p>​<br>​<br>​<br>       P_{1}, \ldots, P_{m}</p>
+<p>​<br>    P1​,…,Pm​ 在 一个时态空间顺序执行，进程Q执行的时态空间则由每个进程 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         i</p>
+<p>​<br>​<br>        (</p>
+<p>​<br>        1</p>
+<p>​<br>        ≤</p>
+<p>​<br>        i</p>
+<p>​<br>        ≤</p>
+<p>​<br>        m</p>
+<p>​<br>        )</p>
+<p>​<br>​<br>       P_{i}(1 \leq i \leq m)</p>
+<p>​<br>    Pi​(1≤i≤m) 执行时态 空间的端点构成。子进程 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         i</p>
+<p>​<br>​<br>​<br>       P_{i}</p>
+<p>​<br>    Pi​ 与Q的执行高度自治，每个进程都可以决定自己执行的时 态空间，仅在每个进程 </p>
+<p>​<br>​<br>​<br>​<br>         P</p>
+<p>​<br>         i</p>
+<p>​<br>​<br>​<br>       P_{i}</p>
+<p>​<br>    Pi​ 执行开始和结束时才和 Q发生信息交互.</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2020/06/01/%E5%85%B3%E4%BA%8EPTL%EF%BC%88%E6%8A%95%E5%BD%B1%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%EF%BC%89%E7%9A%84%E8%AF%AD%E4%B9%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%91%E7%A0%94/" rel="tag">科研</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/06/01/%E4%B8%80%E4%B8%AA%E5%A5%BD%E7%94%A8%E7%9A%84%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%EF%BC%88LaTeX%EF%BC%89/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            一个好用的数学公式编辑器的下载安装（LaTeX）
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/06/01/%E5%85%B3%E4%BA%8Eeclipse%E7%9A%84%E6%8F%92%E4%BB%B6Install%20New%20Software%20%E4%BB%A5%E5%8F%8A%20Eclipse%20MarketPlace%20%E8%BF%9B%E5%BA%A6%E6%85%A2%E6%88%96%E8%80%85%E8%BF%9B%E5%85%A5take%20a%20whie%E5%BE%AA%E7%8E%AF%E5%8A%A0%E8%BD%BD%E8%B5%84%E6%BA%90%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">关于eclipse的插件Install New Software 以及 Eclipse MarketPlace 进度慢或者进入take a whie循环加载资源的解决方法</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Yangzewei
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/256love.ico" alt="Y&amp;&amp;S"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/photo/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

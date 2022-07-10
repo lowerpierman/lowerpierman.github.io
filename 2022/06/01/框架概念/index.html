@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="子标题面试时需删" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>框架概念 |  Y&amp;&amp;S</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/256love.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-框架概念"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  框架概念
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/06/01/%E6%A1%86%E6%9E%B6%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time datetime="2022-06-01T04:56:08.000Z" itemprop="datePublished">2022-06-01</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">6 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="https://raw.githubusercontent.com/lowerpierman/PublicPhoto/main/img/SpringMVC%25E6%25A1%2586%25E6%259E%25B6.jpg" alt="https://raw.githubusercontent.com/lowerpierman/PublicPhoto/main/img/SpringMVC%E6%A1%86%E6%9E%B6.jpg"></p>
+<h1 id="一、Spring框架"><a href="#一、Spring框架" class="headerlink" title="一、Spring框架"></a>一、Spring框架</h1><h2 id="1-关于Spring的AOP和IOC"><a href="#1-关于Spring的AOP和IOC" class="headerlink" title="1.关于Spring的AOP和IOC"></a>1.关于Spring的AOP和IOC</h2><ul>
+<li><h2 id="AOP-Aspect-Oriented-Programming-面向切面编程技术"><a href="#AOP-Aspect-Oriented-Programming-面向切面编程技术" class="headerlink" title="AOP(Aspect Oriented Programming)面向切面编程技术"></a>AOP(Aspect Oriented Programming)面向切面编程技术</h2><h6 id="关键词：横切面编程、面向对象编程、代理模式、低耦合"><a href="#关键词：横切面编程、面向对象编程、代理模式、低耦合" class="headerlink" title="关键词：横切面编程、面向对象编程、代理模式、低耦合"></a>关键词：横切面编程、面向对象编程、代理模式、低耦合</h6></li>
+</ul>
+<blockquote>
+<p>​		Define：通过预编译方式和运行期间动态代理实现程序概念的统一维护的一种技术。</p>
+</blockquote>
+<p>​			人话：那就必须引入OOP(Object Oriented Programming)，这是一种自上而下的编程思想，顾名思义，也就是说OOP是针对系统常见的开发套路，从上而下的考虑系统功能模块该如何实现。但对于一个系统而言，日志管理、权限拦截等横切面的功能存在于自上而下的许多功能模块中，因此我们引入了面向横切面的编程思想，将一些可以横向实现的子功能模块单独处理去实现。这样也减少了OOP中横向功能无法重用导致的代码冗余问题。</p>
+<p>​			总结：AOP就是将程序中的横向功能划分为子模块（日志记录、权限拦截、事务等），然后被调用（注入）到纵向组件（目标对象）中去。AOP也可以对某个对象或某些对象的功能进行增强，比如对象中的方法进行增强，可以在执行某个方法之前额外的做一些事情，在某个方法执行之后额外的做一些事情。</p>
+<h6 id="AOP中的A-x3D-切入点表达式-通知方法"><a href="#AOP中的A-x3D-切入点表达式-通知方法" class="headerlink" title="AOP中的A&#x3D;切入点表达式+通知方法"></a>AOP中的A&#x3D;切入点表达式+通知方法</h6><p>​		切入点表达式：如果当前的组件（对象）满足切入点表达式判断，则spring自动为其创建代理对象，实现额外的方法。</p>
+<p>​		切入点表达式分类：<strong>1.bean表达式（根据模板类的ID判断）</strong>；2.within表达式（类型匹配）；3.execution表达式（参数匹配）；<strong>4.@annotation表达式（根据用户自定义注解拦截）</strong></p>
+<p>​		通知（扩展功能实现位置）方法：前置、后置、异常(error时执行)、最终</p>
+<ul>
+<li><h2 id="IOC-Inversion-of-Control-控制反转思想"><a href="#IOC-Inversion-of-Control-控制反转思想" class="headerlink" title="IOC(Inversion of Control)控制反转思想"></a>IOC(Inversion of Control)控制反转思想</h2><h6 id="关键词：注入、框架生成对象、容器管理对象、ConCurrentHashMap"><a href="#关键词：注入、框架生成对象、容器管理对象、ConCurrentHashMap" class="headerlink" title="关键词：注入、框架生成对象、容器管理对象、ConCurrentHashMap"></a>关键词：注入、框架生成对象、容器管理对象、ConCurrentHashMap</h6></li>
+</ul>
+<p>核心思想：将entity实体类的对象实例化(权利-控制实例化的权利)交给spring(反转-将创建对象的权利交到外部环境如框架中自动生成)，将数据注入交给容器，将对象的生命周期(生成到销毁)交给容器。</p>
+<p>有两种方式配置Bean：xml 与 Annotation</p>
+<p>需要实现的关键技术：</p>
+<p><strong>1.如何创建bean对象。</strong></p>
+<p>​	Spring的IOC对象生成(注入)方法：</p>
+<p>​	1.构造器注入	</p>
+<p>​		定义A和B，B的属性有A</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;a&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.xupt.se.A&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;b&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.xupt.se.B&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">contructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;a&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;a&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​	2.setter方法注入	</p>
+<p>​		定义A和B，B的属性有A,并实现了B对A的getter和setter方法</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;a&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.xupt.se.A&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;b&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.xupt.se.B&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;a&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;a&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​	3.注解注入</p>
+<p>​		@Autowried(Bytype)</p>
+<p>​		@Resource(1.Byname 2.Bytype)</p>
+<p>​		@Service</p>
+<p>​		@Controller</p>
+<p>​		@Component</p>
+<p>​		@Repository</p>
+<h2 id="2-如何使用ConCurrentHashMap管理对象。"><a href="#2-如何使用ConCurrentHashMap管理对象。" class="headerlink" title="2.如何使用ConCurrentHashMap管理对象。"></a><strong>2.如何使用ConCurrentHashMap管理对象。</strong></h2><h2 id="3-Spring-Framework中的功能-不包含Compile-Maven"><a href="#3-Spring-Framework中的功能-不包含Compile-Maven" class="headerlink" title="3.Spring Framework中的功能(不包含Compile(Maven))"></a>3.Spring Framework中的功能(不包含Compile(Maven))</h2><p>Spring Transaction ：Spring事务处理</p>
+<p>Spring Scheduling：Spring定时任务</p>
+<p>Spring Security：一个安全框架，能够为基于Spring的企业应用系统提供声明式的安全访问控制解决方案</p>
+<h1 id="二、Spring-Bean"><a href="#二、Spring-Bean" class="headerlink" title="二、Spring Bean"></a>二、Spring Bean</h1><h5 id="1-Bean指代被框架所管理的对象"><a href="#1-Bean指代被框架所管理的对象" class="headerlink" title="1.Bean指代被框架所管理的对象"></a>1.Bean指代被框架所管理的对象</h5><p>​	我们使用xml或者注解来存储这些bean</p>
+<h6 id="1-1-xml方式"><a href="#1-1-xml方式" class="headerlink" title="1.1 xml方式"></a>1.1 xml方式</h6><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">  //<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;str&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Spring&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="1-2-注解方式"><a href="#1-2-注解方式" class="headerlink" title="1.2 注解方式"></a>1.2 注解方式</h6><p>@Component 通用 作用于类，@Bean作用于方法 </p>
+<p>Configuration与Bean组合使用来装配jar包的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">a</span>&#123;</span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="keyword">public</span> Object <span class="title function_">o</span><span class="params">()</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二者区别：</p>
+<p>1.一个作用于类，一个作用于方法</p>
+<p>2.@Component通过扫描类路径来侦测以及自动装配对象，@Bean则是在有该注解的地方自定义产生对象</p>
+<p>@Repository</p>
+<p>@Service</p>
+<p>@Controller</p>
+<h5 id="2-可以注入Bean的注解"><a href="#2-可以注入Bean的注解" class="headerlink" title="2.可以注入Bean的注解"></a>2.可以注入Bean的注解</h5><p>@Autowired (先byType 后byName)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier(value=&quot;具体指定bean的类名&quot;)</span></span><br><span class="line">Object o;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-指定Bean的作用域"><a href="#3-指定Bean的作用域" class="headerlink" title="3.指定Bean的作用域"></a>3.指定Bean的作用域</h5><p>@Scope(value&#x3D;ConfigurableBeanFactory.SCOPE_XXX)</p>
+<p>分为：</p>
+<ol>
+<li>SINGLETON 单例模式</li>
+<li>PROTOTYPE 正常模式</li>
+<li>REQUEST 仅在本次HTTP Request请求中有效</li>
+<li>SESSION  仅在Session域有效</li>
+</ol>
+<h1 id="三、Spring框架中使用的设计模型"><a href="#三、Spring框架中使用的设计模型" class="headerlink" title="三、Spring框架中使用的设计模型"></a>三、Spring框架中使用的设计模型</h1><p>最重要：代理、工厂、单例、适配器</p>
+<p>模板方法、、观察者(后两个还得看，现在不太会)</p>
+<h1 id="四、Spring-常用Annotation"><a href="#四、Spring-常用Annotation" class="headerlink" title="四、Spring 常用Annotation"></a>四、Spring 常用Annotation</h1><h4 id="1-SpringBootApplication-启动类，在主类中加"><a href="#1-SpringBootApplication-启动类，在主类中加" class="headerlink" title="1. @SpringBootApplication 启动类，在主类中加"></a>1. @SpringBootApplication 启动类，在主类中加</h4><h4 id="2-Controller-RestController-RequestMapping"><a href="#2-Controller-RestController-RequestMapping" class="headerlink" title="2. @Controller  @RestController  @RequestMapping"></a>2. @Controller  @RestController  @RequestMapping</h4><p>@<strong>Controller</strong>主要用于接收前端的请求，使用该注释处理前端请求我们必须在pom.xml中定义前端对应的模板</p>
+<p>作用于类</p>
+<p>模板主要有：</p>
+<p>​			1，FreeMarker<br>​					2，Groovy<br>​					3，Thymeleaf （官方指定版本）<br>​					4，Velocity<br>​					5，JSP (不推荐)</p>
+<p>@<strong>RestController&#x3D;</strong>@Response+@Controller  作用于类</p>
+<p>@**RequestMappering 可以作用在类和方法上	找到对应请求的http域进行处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value=&quot;/Index&quot;,method= RequestMethod.GET/POST)</span></span><br><span class="line"><span class="meta">@RequestMapping(value=&quot;/Index&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-RequestMapping"><a href="#3-RequestMapping" class="headerlink" title="3. @RequestMapping"></a>3. @RequestMapping</h4><p>目前分化为 @GetMapping @PostMapping @PutMapping</p>
+<p>@PatchMapping @DeleteMapping</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value=&quot;/get/&#123;id&#125;&quot;,method=RequestMethod.GET)</span></span><br><span class="line">.equals</span><br><span class="line"><span class="meta">@GetMapping(value=&quot;/get/&#123;id&#125;&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-RequestBody-ReponseBody-RequestParam"><a href="#4-RequestBody-ReponseBody-RequestParam" class="headerlink" title="4.@RequestBody @ReponseBody @RequestParam"></a>4.@RequestBody @ReponseBody @RequestParam</h4><p>@<strong>RequestBody</strong> 是controller接收前端参数的一个注解，只能有一个</p>
+<p>@<strong>RequestParam</strong>可以有多个</p>
+<p>@<strong>RequestBody</strong>和@<strong>RequestParam</strong>可以同时使用</p>
+<p>@<strong>RequestBody</strong>可以接收string、简单对象和复合对象</p>
+<p>@<strong>RequestParam</strong>一般用来接收String</p>
+<p>用法：</p>
+<p>接收参数:@RequestBody User user,@RequestParam(“a”)String a</p>
+<p>@ResponseBody 用来将方法的返回值转为json数据传回前端，适合用于异步传输，如前端的ajax请求</p>
+<h4 id="5-Spring-Boot自定义-Value"><a href="#5-Spring-Boot自定义-Value" class="headerlink" title="5.Spring Boot自定义@Value"></a>5.Spring Boot自定义@Value</h4><p>4.PathVariable、RequestVariable</p>
+<h1 id="五、Spring-Boot"><a href="#五、Spring-Boot" class="headerlink" title="五、Spring Boot"></a>五、Spring Boot</h1><h1 id="六、模板引擎"><a href="#六、模板引擎" class="headerlink" title="六、模板引擎"></a>六、模板引擎</h1><p>动态生成Html</p>
+<p>常用<strong>Thyemleaf</strong>：这是一种倡导自然的模板，以html为模板</p>
+<p>常用语法：标准表达式()、判断与循环、模板布局</p>
+<h1 id="六、Redis-数据库缓存"><a href="#六、Redis-数据库缓存" class="headerlink" title="六、Redis(数据库缓存)"></a>六、Redis(数据库缓存)</h1><p>Redis是一种在内存中存储的数据库，使得相比其他数据库更加高效</p>
+<p>Redis实际上是一种单线程的数据库，且支持多线程</p>
+<h1 id="七、Spring-MVC拦截器"><a href="#七、Spring-MVC拦截器" class="headerlink" title="七、Spring MVC拦截器"></a>七、Spring MVC拦截器</h1><p>基于动态代理来实现，与struts2类似</p>
+<p>HandlerInterceptor 和 WebRequestInterceptor接口</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/06/01/%E6%A1%86%E6%9E%B6%E6%A6%82%E5%BF%B5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/06/01/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%8E%9F%E7%90%86/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            JVM虚拟机原理
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/06/01/06-01%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">06-01算法学习</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Yangzewei
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/256love.ico" alt="Y&amp;&amp;S"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/photo/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="子标题面试时需删" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>阅读Model Checking笔记手册 第一章 模型检测的介绍 |  Y&amp;&amp;S</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/256love.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-阅读Model Checking笔记手册 第一章 模型检测的介绍"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  阅读Model Checking笔记手册 第一章 模型检测的介绍
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/06/01/%E9%98%85%E8%AF%BBModel%20Checking%E7%AC%94%E8%AE%B0%E6%89%8B%E5%86%8C%20%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%A8%A1%E5%9E%8B%E6%A3%80%E6%B5%8B%E7%9A%84%E4%BB%8B%E7%BB%8D/" class="article-date">
+  <time datetime="2021-06-01T13:06:09.000Z" itemprop="datePublished">2021-06-01</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">4.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">15 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="一、模型检测的过程："><a href="#一、模型检测的过程：" class="headerlink" title="一、模型检测的过程："></a>一、模型检测的过程：</h2><p>Modeling 建模 将设计转换为模型检测工具可接受的形式。 Specification 规约 使用时序逻辑等方法描述设计所必须满足的特性或者说设计需要验证的性质。 但模型检查提供了检查设计模型是否满足给定性质的方法，但是无法确定给定性质是否涵盖了系统应该满足的所有属性。 Verification 验证 对于之前建模所建立的模型和规约所描述的性质进行自动验证，如果模型不符合性质则给出相应的反例路径。</p>
+<p>对于程序的不可判定性，可以通过控制其有界性来得到一个有限状态的系统，使得程序具有判定性。（将无界系统划分为无穷个有界系统使程序具有可判定性）</p>
+<p>模型检测方法：首先将要检验的系统转换为状态迁移图（即Kripke结构），规范被表示为时态逻辑公式，然后由模型检测器来决定</p>
+<pre><code>    K
+</code></pre>
+<p>​<br>        ⊨</p>
+<p>​<br>        φ</p>
+<p>​<br>​<br>       K \models \varphi</p>
+<p>​<br>    K⊨φ是否为真，若不为真则模型检测器输出一个反例，这也意味着传统的软件测试检查错误相比验证（证明错误不存在）更快。 模型检测研究过程中出现的两个最主要的问题： 1.由于状态空间爆炸提出的算法改进。 2.建模的扩展。将模型检查框架扩展到Kripke结构和时态逻辑之外。Kripke结构是各种通信有限状态机的自然表示。但对于无界迭代和递归、无界并发和分布、进程创建和重新配置、无界数据类型、实时和网络物理系统、概率计算、安全方面等，为了有效地抽象这些特征，我们需要将建模和规范框架扩展到克里普克结构和经典时态逻辑之外。一些扩展保持可判定性，通常通过构造有限状态抽象，这将建模挑战与算法挑战联系起来；另一些扩展牺牲了可判定性，但是保持了模型检查的能力，以便在系统设计过程的早期自动、系统地发现错误。</p>
+<h2 id="二、模型检测的优势："><a href="#二、模型检测的优势：" class="headerlink" title="二、模型检测的优势："></a>二、模型检测的优势：</h2><p>1.验证的自动化，无需模型检测领域的专业人员辅助。 2.模型检测可以用于设计的各个阶段，既可以用于抽象的模型，也可以用于实现的代码。 3.适用于检验并发方面的错误。</p>
+<p>模型检测相比于其他验证程序的方法最大的特点在于，它可以调试和分析现实世界中存在的所有可以建模为动态的状态转换系统的目标。</p>
+<h2 id="三、模型检测研究过程中出现的两个最主要的问题"><a href="#三、模型检测研究过程中出现的两个最主要的问题" class="headerlink" title="三、模型检测研究过程中出现的两个最主要的问题"></a>三、模型检测研究过程中出现的两个最主要的问题</h2><p>模型检验研究的一个重要部分集中在处理状态空间爆炸的算法方法上，这些方法避免了显式构造完整的Kripke结构，之所以不构造完整的Kripke结构是因为由于每个状态表示给定的时间点下的全局系统状态，所以所有的状态本质上是待验证系统的内存快照（类似网站快照），因此，状态空间的大小与内存大小成指数关系。因此，即使对于相对较小的系统，也不可能直接计算和分析整个相应的Kripke结构。我们大致可以将这些方法分为三大类</p>
+<p>第一类：对状态空间进行约简——用于模型检查的结构化方法利用了定义系统的语法表达式的结构。大型硬件和软件系统被模块化地描述，例如，子例程(过程和方法调用)用顺序结构来表示，交互并行硬件组件和软件进程(线程、参与者)用并发结构来表示。虽然状态空间可能是有限的，但它可以是非常大的，构造和探索代表整个状态空间的Kripke结构将牺牲任何优势，比如从研究系统的定义中可以获得的对称性。故而使用“扁平化”来对系统进行描述。诸如对称约简、动态状态空间探索、偏序约简、假设保证推理和参数验证等技术避免了盲目的扁平化，并以某种方式利用系统结构来获得更好的性能。</p>
+<p>并发软件系统的搜索优化技术（第六章），并发软件系统的复杂性源于并发过程中大量可能的交错。所谓的偏序约简利用了这样一个事实，即来自不同进程的独立事件的顺序对计算结果并不重要。 组合推理(第12章)通过分治法的思想和复杂系统的模块化定义对系统部件的正确性证明推导到整体系统的正确性证明，这种方法从(通常更简单的)系统部件的正确性证明中获得了整体系统正确性的证明。 通常，关于系统部件的证明不是完全独立的，但是，关于系统某个部件的证明可能会对其他部件的行为做出假设，这被称为“假定-保证推理”。</p>
+<p>第二类：对状态空间采用符号编码的方法进行描述减少了内存空间的占用——符号方法通过符号逻辑中的表达式表示Kripke结构的状态集和转换关系，而不是通过状态或转换的显式枚举。符号编码——无论是通过二进制决策图（BDD）、命题公式，还是无量词的一阶约束——都可以极大地压缩表示状态集的数据结构，如果能够有效地执行必要的操作，在验证工具的实际性能上有数量级的改进。第7章和第8章致力于使用二进制决策图(bdd)进行模型检查。作为布尔函数的一种数据结构，二进制决策图比布尔公式和电路的优点是可以在常数时间内检查可满足性和等价性。当在第1.2.3节中讨论的CTL定点算法中使用时，基于二进制决策图的状态集编码在实践中常常能实现数据结构的指数级减少。在20世纪90年代，基于二进制决策图的模型检查获得了显著的性能改进，这对硬件行业中模型检查的成功至关重要。 虽然最初术语“符号模型检查”就是指代基于二进制决策图的模型检查，但最近其他状态集和路径的符号编码(布尔和更通常的情况下)已被证明在不同的情况下是有用的。第9章和第10章介绍了基于SAT的模型检查，一种LTL的符号模型检查方法。正如在第1.2.4节中所讨论的，LTL有套索（缰绳）状的反例，并且布尔公式可以用来根据命题逻辑来指定反例存在的约束条件。通过求解这些约束条件，布尔可满足求解器可以计算出反例的组成部分，或证明反例的不存在性。这样，基于SAT的模型检测可以从SAT解决的最新改进中获益。在最初的公式中，基于SAT的模型检查是不完整的，因为它只能找到有界长度的反例路径(“有界模型检测”)，第十章讨论了实现完整性的方法。如今，基于SAT的模型检查是硬件行业的标准工具，也用于位精确的软件模型检查。为了表达非布尔域上的状态，布尔逻辑可以被无量词一阶逻辑的可判定理论取代，即SAT模理论(SMT)。SMT求解器(第11章)是一种强大的决策程序，它发展迅速，并成为许多现代软件模型检查器的基础。第26和31章讨论了布尔域和非布尔域模型检查的一般定点算法。</p>
+<p>第三类：抽象(第13-15章)是一种更激进的压缩状态空间的方法。抽象将克里普克结构中的K简化为更小的同态图像</p>
+<pre><code>     K
+</code></pre>
+<p>​<br>         ^</p>
+<p>​<br>​<br>​<br>       \hat{K}</p>
+<p>​<br>    K^——抽象模型——它保留了原始结构的某些属性，可以更有效地进行分析。换句话说，抽象模型是系统的有原则的过度逼近。例如，原始结构和抽象结构之间的模拟关系的存在保证了原始结构上的树形反例不会在抽象中丢失，<strong>尽管可能存在仅出现在抽象中的“虚假反例”</strong>。形式上，如果</p>
+<p>​<br>​<br>​<br>​<br>         K</p>
+<p>​<br>         ^</p>
+<p>​<br>​<br>​<br>       \hat{K}</p>
+<p>​<br>    K^模拟K，那么对于整个ACTL*对应ϕ，</p>
+<p>​<br>​<br>​<br>​<br>         K</p>
+<p>​<br>         ^</p>
+<p>​<br>​<br>        ⊨</p>
+<p>​<br>        φ</p>
+<p>​<br>​<br>       \hat{K} \models \varphi</p>
+<p>​<br>    K^⊨φ那么</p>
+<p>​<br>​<br>​<br>        K</p>
+<p>​<br>        ⊨</p>
+<p>​<br>        φ</p>
+<p>​<br>​<br>       K \models \varphi</p>
+<p>​<br>    K⊨φ，但反过来这些都不成立。原始结构和抽象结构之间的其他关系保留了不同的规范逻辑。 许多现代模型检查器的一个关键要素是反例引导的抽象精化——一种通过构建精度不断提高的迭代抽象模型来验证系统的算法方法。为此，通过向抽象模型添加先前从系统描述中忽略的细节来分析和消除虚假反例，以便改进抽象，直到发现真实的反例(即缺陷)，或者不再出现虚假反例并且系统得到验证；参见图6。第14章讨论了内插，一种在路径内定位证明中的断言的聚合逻辑方法，可用于识别和消除虚假反例。第15章介绍了基于谓词抽象的软件验证的现代介绍，其中抽象模型的状态使用程序计数器和程序变量上的约束(“谓词”)来描述。 <img src="https://img-blog.csdnimg.cn/20210510100816736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5MTEwNjc4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>模型检测研究的另一个重要部分是建模的扩展。虽然待验证系统可以使用克里普克结构建模的广泛的系统，但是对于一些关键的应用，基本的状态转移系统模型必须用额外的特征来扩充。对于建模软件来说，有限状态转移系统有四种典型的扩展情景，它们对于建模某些重要的系统类别是必不可少的。</p>
+<ol>
+<li>安全协议的模型检测 安全协议为形式化方法提供了一个完美的应用领域:它们通常很小，但很难被正确处理，它们的正确性至关重要。然而，任何安全协议的方法都必须处理非有限状态的概念，如随机数和密钥、加密和解密以及未知的攻击者。1. 图形游戏 图形游戏是具有多个参与者的状态转移系统的扩展。在每个状态中，一个或多个参与者选择动作，这些动作一起决定系统的下一个状态。需要图形游戏来为具有多个组件、流程、参与者或代理的系统建模，这些组件、流程、参与者或代理具有不同的、有时是冲突的目标。即使系统是单一的，它的环境有时也必须独立考虑，就像两人游戏中的对手一样。1. 概率系统 概率系统是状态转移系统，例如离散时间马尔可夫链或马尔可夫决策过程，其中根据概率分布从某些状态选择下一个状态。概率系统可以模拟不确定性。1. 实时和混合系统 实时和混合系统是具有<strong>连续组件</strong>的<strong>离散</strong>状态转移系统的扩展。在实时系统中，连续组件是时钟，它测量和约束状态转换可能发生的时间；具有这种时钟和时钟约束的有限自动机的扩展称为“时间自动机”；在混合系统中，有限自动机可以用更常见的连续变量来扩展，例如，表示物理系统的位置或温度。虽然时间自动机已经成为连续时间状态转换系统的标准模型，但是需要混合自动机来建模由硬件和软件控制的物理系统(“网络物理系统”)。时间和混合自动机的某些特性仍然是可判定的；在其他情况下，我们有模型检查的半算法，它计算验证问题的答案，但在某些情况下可能形成死循环。<h2 id="四、模型检测的未来"><a href="#四、模型检测的未来" class="headerlink" title="四、模型检测的未来"></a>四、模型检测的未来</h2></li>
+</ol>
+<p>基于硬件和软件的系统越来越普遍，越来越复杂。我们看到从多核处理器到数据中心、传感器网络和云，它们的并发级别不断提高。此外，基于硬件和软件的系统越来越多地部署在安全关键的情况下，从控制和连接心脏的起搏器到飞机的物理控制系统。随着系统复杂性和关键性的急剧增长，对有效验证技术的需求也在增长。换句话说，模型检测的机会比比皆是。我们期望相应的研究工作继续在可伸缩性和建模挑战方面取得进展，将更大和更多样的验证问题纳入模型检测技术的范围。模型检查已经被集成到硬件的设计过程中。在不久的将来，我们预计模型检查将在软件开发实践中取得类似的进展，特别是在容易出错的以控制为中心(而不是以数据为中心)的软件领域，包括系统软件(内核、调度程序、设备驱动程序、内存和通信协议等)、分布式算法和并发数据结构、以及软件定义网络、信息物理系统—-（与物联网相似的概念，与物联网相比，它还强调控制）等。</p>
+<p>其次，虽然在过去，新技术主要是由性能(摩尔定律)和功能(新特性)的提高驱动的，但我们认为，在未来，系统的正确性、可靠性、安全性和整体健壮性将发挥越来越大的作用，也是软件和硬件产品的一个主要区分。我们已经在现代软件系统研究中看到了这种趋势，在现代软件系统研究中，性能曾经是主要的标准，但正确性最近已经在编译器，操作系统和分布式系统研究中占据了中心位置。这一趋势将进一步增加模型检测等形式化验证技术的影响。</p>
+<p>我们认为还有第三个，甚至更基本的原因，模型检测的越发重要的原因是状态迁移系统的出现，它是计算机控制的动态系统设计和研究的通用模型。状态迁移系统是连续动力系统的离散模拟。随着数字技术的兴起，基于状态迁移系统(或“离散事件系统”)的模型在系统工程中变得普遍存在。它们同样适用于人类设计的形式化的动态的包括各种图表、图表和组织中发生的工作流、交互和自适应结构的规则，以及定义物理世界中发生的连续过程的离散抽象。模型检查——作为分析状态迁移系统的中心范例——这仅仅是它在广泛的不同领域应用的开始，从工程（应用）到科学、商业、法律等等领域。</p>
+<p>除了介绍模型检测的未来发展前景之外，还介绍了模型检测当前热点研究的两个方向，以及两个潜在的模型检测新应用领域。</p>
+<ol>
+<li>将模型检测的应用从简单的验证性质转向综合（自动构架符合要求的系统） 在第一个趋势中，当前的许多研究致力于从验证走向综合。验证是检测给定系统是否满足给定规范的任务；综合是构建满足给定规格的系统的任务。虽然全自动功能合成仅在受限的情况下才是有效且实用的，例如高级语言编程，或者对给定的构建块进行电路合成，但是一般的合成任务在需要细化或完成给定的部分系统描述以满足某些属性的设置方面已经取得了很大的进展。通常合成的属性是非功能性的；例如，并发的顺序程序可以自动配备同步结构，如锁或原子区域，以使程序在不改变其顺序语义的情况下安全地并行执行。更一般地说，“计算机辅助编程”的目标是将程序员从繁琐但容易出错的实现细节中解放出来，这样他们就可以专注于设计的功能，同时自动满足设计安全和容错方面的其他要求。反应式(或顺序式)综合是指满足给定时间规范的状态迁移系统的综合，该规范约束期望系统的输入&#x2F;输出行为；这个问题在数理逻辑、控制理论、博弈论和反应式编程中有平行的历史，并在第二章中详细讨论。最近，大量的工作致力于模板和语法引导的合成方法，并在合成中使用归纳以及学习技术。1. List item</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/06/01/%E9%98%85%E8%AF%BBModel%20Checking%E7%AC%94%E8%AE%B0%E6%89%8B%E5%86%8C%20%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%A8%A1%E5%9E%8B%E6%A3%80%E6%B5%8B%E7%9A%84%E4%BB%8B%E7%BB%8D/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%91%E7%A0%94/" rel="tag">科研</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2021/06/01/%E5%B9%B6%E5%8F%91%E7%BC%BA%E9%99%B7%E5%88%86%E7%B1%BB%E5%8F%8A%E8%AF%A6%E8%BF%B0/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            并发缺陷分类及详述
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/06/01/%E9%98%85%E8%AF%BBModel%20Checking%E7%AC%94%E8%AE%B0%E6%89%8B%E5%86%8C%20%E7%AC%AC%E4%B8%89%E7%AB%A0%20%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">阅读Model Checking笔记手册 第三章 模型验证</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Yangzewei
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/256love.ico" alt="Y&amp;&amp;S"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/photo/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

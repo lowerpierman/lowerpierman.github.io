@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="子标题面试时需删" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Mybatis框架使用总结及学习 |  Y&amp;&amp;S</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/256love.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Mybatis框架使用总结及学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Mybatis框架使用总结及学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/06/22/Mybatis%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93%E5%8F%8A%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2022-06-22T02:31:16.000Z" itemprop="datePublished">2022-06-22</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="零、什么是Mybatis"><a href="#零、什么是Mybatis" class="headerlink" title="零、什么是Mybatis"></a>零、什么是Mybatis</h1><p>Mybatis的官方概念是一种半ORM(对象关系映射)的轻量级框架，说开了讲，Mybatis是一种封装了JDBC操作的数据库持久层框架，使用户只关注sql语句的编写，无需关心sql的连接与驱动的执行。</p>
+<p>但技术人员需要了解基础CONN实现，以下java类需要了解：</p>
+<p>Connections、DriverManager、Statement、PreparedStatement、ResultSet</p>
+<p>Connections	管道类，常用他实现java和mysql的连接，常使用DriverManager实例化</p>
+<p>常用方法：Connections conn &#x3D; DriverManager.getConnections(DBURL,DBNAME,DBPASS);</p>
+<p>​				conn.close(); 关闭sql连接</p>
+<p>Statement&#x2F;PreparedStatement&#x3D;conn.createStatement();	创建Statement或PreparedStatement对象</p>
+<p>​					conn.commit();	提交事务，在执行完sql语句后，需要trycatch模块，若事务未完成，在catch部分conn.rollback;</p>
+<p>Statement与PreparedStatement	</p>
+<p>stmt&#x2F;pst.excuteQuery(sql);	</p>
+<p>stmt&#x2F;pst.excuteUpdate(sql);&#x2F;&#x2F;修改、删除</p>
+<p>stmt&#x2F;pst.excuteUpdate(sql，Statement_Return_Generation_Keys);&#x2F;&#x2F;添加</p>
+<p>但pst可以传入缺省参数	pst.set()</p>
+<p>ResultSet	结果集，获取stms&#x2F;pst执行结果</p>
+<p>查询返回	rs &#x3D; 	stmt&#x2F;pst.excuteQuery(sql);	</p>
+<p>修改删除返回	rs&#x3D;stmt&#x2F;pst&#x2F;excuteUpdate(sql);</p>
+<p>添加返回	rs&#x3D;stmt.getGeneratedKeys();</p>
+<h5 id="如果添加或删除或修改或查询多次需要用到事务，则必须有事务的提交和回滚，需要把conn的默认自动提交设置为falseconn-setAutoCommit-false"><a href="#如果添加或删除或修改或查询多次需要用到事务，则必须有事务的提交和回滚，需要把conn的默认自动提交设置为falseconn-setAutoCommit-false" class="headerlink" title="如果添加或删除或修改或查询多次需要用到事务，则必须有事务的提交和回滚，需要把conn的默认自动提交设置为false	conn.setAutoCommit(false);"></a>如果添加或删除或修改或查询多次需要用到事务，则必须有事务的提交和回滚，需要把conn的默认自动提交设置为false	conn.setAutoCommit(false);</h5><h1 id="一、传统jdbc连接与使用Mybatis的区别"><a href="#一、传统jdbc连接与使用Mybatis的区别" class="headerlink" title="一、传统jdbc连接与使用Mybatis的区别"></a>一、传统jdbc连接与使用Mybatis的区别</h1><h6 id="传统jdbc连接在上节已经阐述清楚，本节主要说明Mybatis的结构、如何使用，以及Mybatis在使用过程中的注意事项"><a href="#传统jdbc连接在上节已经阐述清楚，本节主要说明Mybatis的结构、如何使用，以及Mybatis在使用过程中的注意事项" class="headerlink" title="传统jdbc连接在上节已经阐述清楚，本节主要说明Mybatis的结构、如何使用，以及Mybatis在使用过程中的注意事项"></a>传统jdbc连接在上节已经阐述清楚，本节主要说明Mybatis的结构、如何使用，以及Mybatis在使用过程中的注意事项</h6><h2 id="1-1-Mybatis结构"><a href="#1-1-Mybatis结构" class="headerlink" title="1.1 Mybatis结构"></a>1.1 Mybatis结构</h2><p>我们从核心到边缘依次分析Mybatis的结构框架</p>
+<p>mybatis-config.xml	</p>
+<ul>
+<li><configuration>-&gt;<settings>配置日志输出</li>
+<li><configuration>-&gt;<environments>配置Mybatis的dburl、dbdriver、dbname、dbpass等等</li>
+<li><configuration>-&gt;<environments>-&gt;<mappers>配置对应的sql文件(一般一个mapper对应一个entity的sql操作)</li>
+</ul>
+<p>jdbc.properties	存放dburl等等数据</p>
+<p>XXX(User)	实体类，可以使用TypeAlieas设置别名在mapper中使用</p>
+<p>XXXmapper.xml	配置对应实体类的sql语句以及方法名</p>
+<p>XXXmapper(%).java	配置对应的mapperjava文件，在使用时调用</p>
+<p>XXXServices.java	调用对应mapper，是持久层和控制层的中间过程</p>
+<p>XXXController.java	调用service来使用sql操作方法</p>
+<h2 id="1-2-Mybatis使用具体细节"><a href="#1-2-Mybatis使用具体细节" class="headerlink" title="1.2 Mybatis使用具体细节"></a>1.2 Mybatis使用具体细节</h2><p>在具体执行过程中，我们需要将mybatis的config文件读取，</p>
+<p>使用InputStream ip&#x3D;Resource.getResourceAsStream(“…”),</p>
+<p>并实例化SqlsessionFactory，调用其openssion()方法来实现SqlSession，</p>
+<p>接着调用mapper中的sql方法，最终提交事务，关闭sqlsession连接</p>
+<h2 id="1-3-Mybatis注意事项"><a href="#1-3-Mybatis注意事项" class="headerlink" title="1.3 Mybatis注意事项"></a>1.3 Mybatis注意事项</h2><h5 id="1-区别"><a href="#1-区别" class="headerlink" title="1.#{}	${} 区别"></a>1.#{}	${} 区别</h5><p>​		一个是可以缺省的，一个试字符串拼接</p>
+<h5 id="2-数据库字段和entity字段不一样"><a href="#2-数据库字段和entity字段不一样" class="headerlink" title="2.数据库字段和entity字段不一样"></a>2.数据库字段和entity字段不一样</h5><ul>
+<li><p>​	在sql查询中起别名如：select order_id id,order_name name from order;</p>
+</li>
+<li><p>​    使用ResultMap为entity设置映射关系</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getOrder&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;int&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">resultMap</span>=<span class="string">&quot;testmap&quot;</span>&gt;</span></span><br><span class="line">select * from orders where order_id=#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">”com.order”</span> <span class="attr">id</span>=<span class="string">”testmap”</span>&gt;</span></span><br><span class="line">&lt;!–用 id 属性来映射主键字段–&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">”id”</span> <span class="attr">column</span>=<span class="string">”order_id”</span>&gt;</span></span><br><span class="line">&lt;!–用 result 属性来映射非主键字段，property 为实体类属性名，column</span><br><span class="line">为数据表中的属性–&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span> = <span class="string">“ordername”</span> <span class="attr">column</span> =<span class="string">”order_name”/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">reslutMap</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="3-如何模糊查询"><a href="#3-如何模糊查询" class="headerlink" title="3.如何模糊查询"></a>3.如何模糊查询</h5><p>​	在输入的String中拼好，如果在mapper文件的sql语句中写可能会引起sql注入</p>
+<h5 id="4-Mapper类的作用"><a href="#4-Mapper类的作用" class="headerlink" title="4.Mapper类的作用"></a>4.Mapper类的作用</h5><p>​	为mapper.xml文件提供参数，获取返回值</p>
+<p>​	Mapper的方法可以重载，但这些方法参数个数不能相同，只能对应一个<select>标签，我们可以通过<where><if>标签的组合来判断参数的个数不同。</p>
+<h5 id="5-Mybatis的分页"><a href="#5-Mybatis的分页" class="headerlink" title="5.Mybatis的分页"></a><strong>5.Mybatis的分页</strong></h5><p>答：**(1)** MyBatis 使用 RowBounds 对象进行分页，它是针对 ResultSet 结果集执行的内存分页，而非物理分页；**(2)** 可以在 sql 内直接书写带有物理分页的参数来完成物理分页功能，**(3)** 也可以使用分页插件来完成物理分页。</p>
+<p>分页插件的基本原理是使用 MyBatis 提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的 sql，然后重写 sql，根据 dialect 方言，添加对应的物理分页语句和物理分页参数。</p>
+<p>举例： <code>select _ from student</code> ，拦截 sql 后重写为： &#96;select t._ from （select * from student）t limit 0，10</p>
+<h5 id="6-Xml-映射文件中，除了常见的-select-insert-update-delete-标签之外，还有哪些标签？"><a href="#6-Xml-映射文件中，除了常见的-select-insert-update-delete-标签之外，还有哪些标签？" class="headerlink" title="6.Xml 映射文件中，除了常见的 select|insert|update|delete 标签之外，还有哪些标签？"></a>6.Xml 映射文件中，除了常见的 select|insert|update|delete 标签之外，还有哪些标签？</h5><p>ResultMap、parameterMap、sql、include、selectkey 以及动态sql使用的标签</p>
+<h5 id="7-Mybatis如何将结果封装返回"><a href="#7-Mybatis如何将结果封装返回" class="headerlink" title="7.Mybatis如何将结果封装返回"></a>7.Mybatis如何将结果封装返回</h5><p>​	不管是别名还是resultmap，Mybatis最终使用反射来创建对象，给对象属性一一赋值并返回</p>
+<h5 id="8-批量插入-此时需要"><a href="#8-批量插入-此时需要" class="headerlink" title="8.批量插入 此时需要#{}"></a>8.批量插入 此时需要#{}</h5><p>​	在xml定义了缺省，在mapper中接收参数，Mybatis就实现了preparedstatement的set方法</p>
+<h5 id="9-传入多个参数如何判断"><a href="#9-传入多个参数如何判断" class="headerlink" title="9.传入多个参数如何判断"></a>9.传入多个参数如何判断</h5><ol>
+<li>​	#{0}代表传入第一个，以此类推</li>
+<li>@param注解       <ol>
+<li>mapper传参方法这么写：select(@param(“username”)String username,@param(“order_intro”)String intro )</li>
+<li>xml文件    #{username}与#{order_intro}</li>
+</ol>
+</li>
+</ol>
+<h5 id="10-动态sql"><a href="#10-动态sql" class="headerlink" title="10.动态sql"></a>10.动态sql</h5><p>​		在xml内以标签的形式编写sql，根据表达式的值完成逻辑判断并动态拼接sql</p>
+<p>​			trim | where | set | foreach | if | choose | when | otherwise | bind</p>
+<p>​			典型的用法见4</p>
+<h5 id="11-collection集合标签的使用"><a href="#11-collection集合标签的使用" class="headerlink" title="11.collection集合标签的使用"></a>11.collection集合标签的使用</h5><p>​		主要用于一对多的查询，在resultmap中定义了多的那部分的命名映射，例子：</p>
+<p>​		Miss Su有多个快递	这个场景也就是说一个人(User)可能同时拥有多个快递(Package)，我们现在需要根据用户id来查询用户的包裹。</p>
+<p>​		Mapper.java	findPackageByuid(@param(“id”)Integer id);</p>
+<p>​		UserMapper.xml	</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;findPackageByuid&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;testmap&quot;</span>&gt;</span></span><br><span class="line">    select u.*,p.* from user as u,package as p where u.id=#&#123;id&#125; and u.id=p.pid</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;Package&quot;</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">&quot;packages&quot;</span> <span class="attr">ofType</span>=<span class="string">&quot;Package&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;pack_collection&quot;</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">&quot;Package&quot;</span> <span class="attr">id</span>=<span class="string">&quot;pack_collection&quot;</span>&gt;</span>//这样达到了collection集合的复用</span><br><span class="line">	<span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;pid&quot;</span> <span class="attr">column</span>=<span class="string">&quot;p_id&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;p_Name&quot;</span> <span class="attr">column</span>=<span class="string">&quot;p_name&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;p_type&quot;</span> <span class="attr">column</span>=<span class="string">&quot;p_score&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="12-Mybatis的一对一和一对多"><a href="#12-Mybatis的一对一和一对多" class="headerlink" title="12.Mybatis的一对一和一对多"></a>12.Mybatis的一对一和一对多</h5><h6 id="一对一例子：Student-sid-sno-sname-card-cid-count-Card-cid-count"><a href="#一对一例子：Student-sid-sno-sname-card-cid-count-Card-cid-count" class="headerlink" title="一对一	例子：Student(sid,sno,sname,card(cid,count))	Card(cid,count)"></a>一对一	例子：Student(sid,sno,sname,card(cid,count))	Card(cid,count)</h6><ol>
+<li><p>创建A类的子类C，扩展B类的属性，写C的mapper</p>
+</li>
+<li><p>resultmap  </p>
+<ol>
+<li>使用association映射</li>
+</ol>
+   <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">&quot;card&quot;</span> <span class="attr">javatype</span>=<span class="string">&quot;Card&quot;</span>&gt;</span>//association有select属性，可以直接关联到select标签，通过select加载</span><br><span class="line">	<span class="tag">&lt;<span class="name">result</span>&gt;</span>...<span class="tag">&lt;/<span class="name">result</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h6 id="一对多见11"><a href="#一对多见11" class="headerlink" title="一对多	见11"></a>一对多	见11</h6><h5 id="13-什么是延迟加载？Mybatis是否使用到了延迟加载？"><a href="#13-什么是延迟加载？Mybatis是否使用到了延迟加载？" class="headerlink" title="13. 什么是延迟加载？Mybatis是否使用到了延迟加载？"></a>13. 什么是延迟加载？Mybatis是否使用到了延迟加载？</h5><p>所谓延迟加载，就是我们在不需要关联查询时先不加载association和collection中的信息，需要时再加载(是否需要跟controller申请的资源有关)</p>
+<p>具体实现：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--设置是否启用懒加载/延迟加载，不启用的话，所有相关联的数据都会被初始化加载&quot;/&gt;		</span></span><br><span class="line"><span class="comment">&lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;</span></span><br><span class="line"><span class="comment">      &lt;!--按需加载/消极加载开关 延迟加载也需要开启，默认为积极true--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;aggressiveLazyLoading&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>原理：使用CGLIB创建目标对象的代理对象，当目标对象调用get方法获取延迟加载的属性时，invoke拦截器判断该属性值目前是否为空，为空则调用事先保存好的关联sql语句查询，并调用set方法保存值</p>
+<h5 id="14-Mybatis的一级二级缓存"><a href="#14-Mybatis的一级二级缓存" class="headerlink" title="14. Mybatis的一级二级缓存"></a>14. Mybatis的一级二级缓存</h5><p>6-23<strong>补充</strong></p>
+<h5 id="15-Mybatis的设计模式"><a href="#15-Mybatis的设计模式" class="headerlink" title="15. Mybatis的设计模式"></a>15. Mybatis的设计模式</h5><p>建造者模式	SQLSessionFactoryBuilder</p>
+<p>单例模式	LogFactory</p>
+<p>代理模式	延迟缓存	MapperProxy</p>
+<p>工厂模式	SQLSessionFactory</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/06/22/Mybatis%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93%E5%8F%8A%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/06/30/nowcoder-java/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            nowcoder_java
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/06/19/Linux%E4%B8%93%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Linux专题总结</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022
+        <i class="ri-heart-fill heart_icon"></i> Yangzewei
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/256love.ico" alt="Y&amp;&amp;S"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/photo/">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
